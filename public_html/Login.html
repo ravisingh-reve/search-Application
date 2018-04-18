@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="container">
+    <div id="login" class="signin-card">
+        <div class="logo-image">
+            <img class="hidden" src="http://www.officialpsds.com/images/thumbs/Spiderman-Logo-psd59240.png"  title="Logo" width="138">
+        </div>
+        <h1 class="display1">LOGIN </h1>
+       
+        <form>
+            <div class="alert alert-warning alert-dismissible alertMsg" role="alert" id="warningAlert1" style="display: none;">
+                            <span class="webRtcErrors alertMsgSet" id="msgCallBackForm">
+                                
+                            </span>
+
+              </div>
+            <div id="form-login-username" class="form-group">
+                <input id="username" class="form-control" ng-model="userName" name="username" type="text" size="18" required />
+                <span class="form-highlight"></span>
+                <span class="form-bar"></span>
+                <label for="username" class="float-label">username</label>
+            </div>
+            <div id="form-login-password" class="form-group">
+                <input id="passwd" class="form-control" ng-model="passWord" name="password" type="password" size="18"  required>
+                <span class="form-highlight"></span>
+                <span class="form-bar"></span>
+                <label for="password" class="float-label">password</label>
+            </div>
+            
+            <div>
+                <button class="btn btn-block btn-info ripple-effect"  ng-click="loginAuthFunction(userName,passWord)"type="submit" name="Submit" >Sign in</button>  
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
