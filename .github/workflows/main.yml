@@ -1,19 +1,4 @@
-name: Lighthouse Check
-on: [push]
-
-jobs:
-  lighthouse-check:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    - run: mkdir /tmp/artifacts
-    - name: Run Lighthouse
-      uses: foo-software/lighthouse-check-action@master
-      with:
-        outputDirectory: /tmp/artifacts
-        urls: 'https://tataclicq.com,https://www.tatacliq.com/utsa-by-westside-aqua-embroidered-a-line-kurta/p-mp000000016265479'
-    - name: Upload artifacts
-      uses: actions/upload-artifact@master
-      with:
-        name: Lighthouse reports
-        path: /tmp/artifacts
+uses: manrueda/lighthouse-report-action@v1.0.1
+with:
+  reports: '.lighthouseci'
+  github-token: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}    
