@@ -1,19 +1,19 @@
-# Example of output usage
-name: LHCI-output-webhook
-on: push
+name: Lighthouse Check
+on: [push]
+
 jobs:
-  output-webhook:
+  lighthouse-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Use output for sending data to API.
-        id: LHCIAction
-        uses: ./
-        with:
-          urls: |
-            https://tataclicq.com/
-      - name: Webhook
-        uses: denar90/webhook-action@0.1.1
-        with:
-            webhookUrl: ${{secrets.ACTION_WEBHOOK_URL}}
-            data: '{ "links": ${{steps.LHCIAction.outputs.links}}, "manifest": ${{steps.LHCIAction.outputs.manifest}} }'
+    - uses: actions/checkout@master
+    - run: mkdir /tmp/artifacts
+    - name: Run Lighthouse
+      uses: foo-software/lighthouse-check-action@master
+      with:
+        outputDirectory: /tmp/artifacts
+        urls: 'https://www.foo.software,https://www.foo.software/contact'
+    - name: Upload artifacts
+      uses: actions/upload-artifact@master
+      with:
+        name: Lighthouse reports
+        path: /tmp/artifacts
