@@ -1,15 +1,19 @@
-name: Lighthouse CI
+# Example of output usage
+name: LHCI-output-webhook
 on: push
 jobs:
-  lighthouse:
+  output-webhook:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Audit URLs using Lighthouse
-        uses: treosh/lighthouse-ci-action@v9
+      - name: Use output for sending data to API.
+        id: LHCIAction
+        uses: ./
         with:
           urls: |
-            https://www.tatacliq.com/
-          budgetPath: ./budget.json # test performance budgets
-          uploadArtifacts: true # save results as an action artifacts
-          temporaryPublicStorage: true
+            https://tataclicq.com/
+      - name: Webhook
+      - uses: denar90/webhook-action@0.1.1
+        with:
+            webhookUrl: ${{secrets.ACTION_WEBHOOK_URL}}
+            data: '{ "links": ${{steps.LHCIAction.outputs.links}}, "manifest": ${{steps.LHCIAction.outputs.manifest}} }'
