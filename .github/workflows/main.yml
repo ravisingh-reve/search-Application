@@ -1,3 +1,5 @@
+name: CI
+on: [push]
 uses: manrueda/lighthouse-report-action@v1.0.1
 with:
   reports: '.lighthouseci'
