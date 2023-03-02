@@ -30,7 +30,7 @@ async function main() {
     collectArgs.push(`--static-dist-dir=${input.staticDistDir}`)
   } else if (input.urls) {
     for (const url of input.urls) {
-      collectArgs.push(`--collect.url=${url}`)
+      collectArgs.push(`--url=${url}`)
     }
   }
   // else LHCI will panic with a non-zero exit code...
