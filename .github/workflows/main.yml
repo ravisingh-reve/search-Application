@@ -13,6 +13,8 @@ jobs:
           accessToken: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
           outputDirectory: /tmp/artifacts
           slackWebhookUrl: '${{ secrets.WEB_VITALS_HOOK }}'
+          data: |
+            {"text": "Hello, world."}
           urls: 'https://www.tatacliq.com'
       - name: Upload artifacts
         uses: actions/upload-artifact@master
