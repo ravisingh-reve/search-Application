@@ -12,7 +12,7 @@ jobs:
           urls: |
             https://www.tatacliq.com
       - name: Webhook
-        uses: denar90/webhook-action@0.1.1
+        uses: denar90/webhook-action@0.1.0
         with:
           webhookUrl: '${{secrets.WEB_VITALS_HOOK}}'
           data: '{"text": "hum land kar rahe hai please help" }'
