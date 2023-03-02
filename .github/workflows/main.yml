@@ -17,4 +17,4 @@ jobs:
           webhookUrl: '${{secrets.WEB_VITALS_HOOK}}'
           data: >-
             { "github": ${{ toJSON(github) }}, "links":
-            ${{steps.LHCIAction.outputs.links}} }
+            ${{steps.LHCIAction.outputs.manifest}} }
