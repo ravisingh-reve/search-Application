@@ -1,6 +1,5 @@
-# Example of output usage
 name: LHCI-output-webhook
-on: push
+'on': push
 jobs:
   output-webhook:
     runs-on: ubuntu-latest
@@ -15,6 +14,7 @@ jobs:
       - name: Webhook
         uses: denar90/webhook-action@0.1.1
         with:
-          webhookUrl: ${{secrets.WEB_VITALS_HOOK}}
-          body: >
-              {"type": "message","text": "This is reply from bot!"}
+          webhookUrl: >-
+            https://tataunistore0.webhook.office.com/webhookb2/e5a9fb0f-a13d-41b9-aed8-91bb069e624c@33aa0ee4-90f0-486d-83c3-6fada33eb801/IncomingWebhook/76c1fbb7852b410189bcc843c10dee9a/26948857-23f9-46b7-bbf8-d60798503421
+          body: |
+            {"type": "message","text": "This is reply from bot!"}
