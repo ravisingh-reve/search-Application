@@ -5,7 +5,7 @@ jobs:
   perf:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
@@ -19,8 +19,8 @@ jobs:
           uploadArtifacts: true
           temporaryPublicStorage: true
       - name: Webhook
-        uses: denar90/webhook-action@0.1.0
+        uses: denar90/webhook-action@0.1.1
         with:
           webhookUrl: '${{secrets.WEB_VITALS_HOOK}}'
           data: |
-            '{"text": "hum land kar rahe hai please help"}'
+            {"text": "hum land kar rahe hai please help"}
