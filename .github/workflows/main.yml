@@ -15,6 +15,6 @@ jobs:
         uses: denar90/webhook-action@0.1.1
         with:
           webhookUrl: '${{secrets.WEB_VITALS_HOOK}}'
-          content-type: application/json
-          data: |
-            {"type": "message","text": "This is reply from bot!"}
+          data: >-
+            { "github": ${{ toJSON(github) }}, "links":
+            ${{steps.LHCIAction.outputs.links}} }
