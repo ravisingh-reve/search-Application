@@ -4,7 +4,7 @@ jobs:
   output-webhook:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - name: Use output for sending data to API.
         id: LHCIAction
         uses: ./
