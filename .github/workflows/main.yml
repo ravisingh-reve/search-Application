@@ -16,4 +16,21 @@ jobs:
         uses: denar90/webhook-action@0.1.1
         with:
           webhookUrl: ${{secrets.WEB_VITALS_HOOK}}
-          data: '{"manifest": ${{steps.LHCIAction.outputs.manifest}} }'
+          data: '{"@type": "MessageCard",
+          "@context": "http://schema.org/extensions",
+          "themeColor": "0076D7",
+          "summary": "Attention Light House",
+              "sections": [{
+        "activityTitle": "Light house Report",
+        "activitySubtitle": "On Project Tango",
+        "activityImage": "https://teamsnodesample.azurewebsites.net/static/img/image5.png",
+        "facts": [{
+            "name": "Assigned to",
+            "value": "Web Team"
+        }, {
+            "name": "Light House Data",
+            "value": "${{steps.LHCIAction.outputs.manifest}}"
+        }],
+        "markdown": true
+    }],
+    }'
