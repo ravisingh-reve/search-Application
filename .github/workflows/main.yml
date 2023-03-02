@@ -16,21 +16,23 @@ jobs:
         uses: denar90/webhook-action@0.1.1
         with:
           webhookUrl: ${{secrets.WEB_VITALS_HOOK}}
-          data: '{"@type": "MessageCard",
-          "@context": "http://schema.org/extensions",
-          "themeColor": "0076D7",
-          "summary": "Attention Light House",
-              "sections": [{
-        "activityTitle": "Light house Report",
-        "activitySubtitle": "On Project Tango",
-        "activityImage": "https://teamsnodesample.azurewebsites.net/static/img/image5.png",
-        "facts": [{
-            "name": "Assigned to",
-            "value": "Web Team"
-        }, {
-            "name": "Light House Data",
-            "value": "Data"
-        }],
-        "markdown": true
-    }],
-    }'
+          data: '{
+   "type":"message",
+   "attachments":[
+      {
+         "contentType":"application/vnd.microsoft.card.adaptive",
+         "contentUrl":null,
+         "content":{
+            "$schema":"http://adaptivecards.io/schemas/adaptive-card.json",
+            "type":"AdaptiveCard",
+            "version":"1.2",
+            "body":[
+                {
+                "type": "TextBlock",
+                "text": "For Samples and Templates, see [https://adaptivecards.io/samples](https://adaptivecards.io/samples)"
+                }
+            ]
+         }
+      }
+   ]
+}'
