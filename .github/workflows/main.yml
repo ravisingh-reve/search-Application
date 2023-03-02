@@ -21,7 +21,6 @@ jobs:
       - name: Webhook
         uses: denar90/webhook-action@0.1.1
         with:
-          webhookUrl: >-
-            https://hooks.slack.com/services/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
+          webhookUrl: 'https://hooks.slack.com/services/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'
           data: |
             {"text": "hum land kar rahe hai please help"}
