@@ -1,6 +1,6 @@
 name: Lighthouse Check
 'on':
-  - pull_request
+  - push
 jobs:
   lighthouse-check:
     runs-on: ubuntu-latest
