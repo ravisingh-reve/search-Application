@@ -21,5 +21,5 @@ jobs:
       - name: Webhook
         uses: denar90/webhook-action@0.1.1
         with:
-          webhookUrl: '${{secrets.SLACK_WEB_HOOK}}'
+          webhookUrl: '${{secrets.WEB_VITALS_HOOK}}'
           data: '{"text": "hum land kar rahe hai please help"}'
