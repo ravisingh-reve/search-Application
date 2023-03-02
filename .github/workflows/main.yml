@@ -16,4 +16,4 @@ jobs:
         with:
           webhookUrl: '${{secrets.WEB_VITALS_HOOK}}'
           data: |
-            { "text": steps.LHCIAction.outputs.manifest}
+            { "text": "hello we land here"}
