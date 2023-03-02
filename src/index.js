@@ -30,14 +30,14 @@ async function main() {
     collectArgs.push(`--static-dist-dir=${input.staticDistDir}`)
   } else if (input.urls) {
     for (const url of input.urls) {
-      collectArgs.push(`--url=${url}`)
+      collectArgs.push(`--collect.url=${url}`)
     }
   }
   // else LHCI will panic with a non-zero exit code...
 
   if (input.configPath) collectArgs.push(`--config=${input.configPath}`)
 
-  const collectStatus = runChildCommand('collect --headful', collectArgs)
+  const collectStatus = runChildCommand('collect', collectArgs)
   if (collectStatus !== 0) throw new Error(`LHCI 'collect' has encountered a problem.`)
 
   core.endGroup() // Collecting
