@@ -1,19 +1,26 @@
 name: LHCI-output-webhook
-'on': push
+'on':
+  - push
 jobs:
-  output-webhook:
+  perf:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Use output for sending data to API.
+      - uses: actions/checkout@v2
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Audit URLs using Lighthouse
         id: LHCIAction
-        uses: ./
+        uses: treosh/lighthouse-ci-action@v3
         with:
           urls: |
             https://www.tatacliq.com
+          uploadArtifacts: true
+          temporaryPublicStorage: true
       - name: Webhook
-        uses: denar90/webhook-action@0.1.1
+        uses: denar90/webhook-action@0.1.0
         with:
           webhookUrl: '${{secrets.WEB_VITALS_HOOK}}'
           data: |
-            {"text": "hum land kar rahe hai please help" }
+            '{"text": "hum land kar rahe hai please help"}'
