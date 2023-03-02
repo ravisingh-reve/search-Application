@@ -37,7 +37,7 @@ async function main() {
 
   if (input.configPath) collectArgs.push(`--config=${input.configPath}`)
 
-  const collectStatus = runChildCommand('collect', collectArgs)
+  const collectStatus = runChildCommand('collect --headful', collectArgs)
   if (collectStatus !== 0) throw new Error(`LHCI 'collect' has encountered a problem.`)
 
   core.endGroup() // Collecting
