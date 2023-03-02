@@ -17,4 +17,4 @@ jobs:
         with:
           webhookUrl: ${{secrets.WEB_VITALS_HOOK}}
           data: >
-          {"type": "message","text": "This is reply from bot!"}
+              {"type": "message","text": "This is reply from bot!"}
