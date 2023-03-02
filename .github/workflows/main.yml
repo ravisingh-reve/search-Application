@@ -11,7 +11,7 @@ jobs:
         uses: ./
         with:
           urls: |
-            https://tataclicq.com/
+            https://www.tatacliq.com
       - name: Webhook
         uses: denar90/webhook-action@0.1.1
         with:
