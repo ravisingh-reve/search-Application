@@ -24,7 +24,7 @@ jobs:
         with:
           github-token: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           script: |
-            const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}'));
+            const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
             console.log('${{steps.LHCIAction.outputs.manifest}}');
             core.setOutput('htmlPath', htmlPath);
       - name: Deploy Stage
@@ -47,7 +47,7 @@ jobs:
                           "body":[
                               {
                               "type": "TextBlock",
-                              "text": "Lighthouse Report ${{steps.LHCIAction.outputs.manifest}} ${{toJSON(steps.htmlPath)}}"
+                              "text": "Lighthouse Report ${{toJSON(steps.htmlPath.outputs.htmlPath)}}"
                               }
                           ]
                       }
