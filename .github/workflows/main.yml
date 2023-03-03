@@ -27,5 +27,21 @@ jobs:
           data: |
             {
               "type":"message",
-              "manifest": '${{steps.LHCIAction.outputs.manifest[0]}}'
+              "attachments":[
+                  {
+                    "contentType":"application/vnd.microsoft.card.adaptive",
+                    "contentUrl":null,
+                    "content":{
+                        "$schema":"http://adaptivecards.io/schemas/adaptive-card.json",
+                        "type":"AdaptiveCard",
+                        "version":"1.2",
+                        "body":[
+                            {
+                            "type": "TextBlock",
+                            "text": "Lighthouse report [${{steps.LHCIAction.outputs.links[1]}}](${{steps.LHCIAction.outputs.links[1]}})"
+                            }
+                        ]
+                    }
+                  }
+              ]
             }
