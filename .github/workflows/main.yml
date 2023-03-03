@@ -1,23 +1,31 @@
-name: Lighthouse Check
+name: LHCI-output-webhook
 'on':
   - push
 jobs:
-  lighthouse-check:
+  lighthouse:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - run: mkdir /tmp/artifacts
-      - name: Run Lighthouse
-        uses: foo-software/lighthouse-check-action@master
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v1
         with:
-          accessToken: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
-          outputDirectory: /tmp/artifacts
-          slackWebhookUrl: '${{ secrets.WEB_VITALS_HOOK }}'
+          node-version: 16.x
+      - name: Audit URLs using Lighthouse
+        id: LHCIAction
+        uses: treosh/lighthouse-ci-action@v3
+        with:
+          urls: |
+            https://www.tatacliq.com
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+      - name: Deploy Stage
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: '${{secrets.WEB_VITALS_HOOK}}'
+          method: POST
+          customHeaders: '{"Content-Type": "application/json"}'
           data: |
-            {"text": "Hello, world."}
-          urls: 'https://www.tatacliq.com'
-      - name: Upload artifacts
-        uses: actions/upload-artifact@master
-        with:
-          name: Lighthouse reports
-          path: /tmp/artifacts
+            {
+              "type":"message",
+              "manifest": '${{steps.LHCIAction.outputs.manifest}}'
+            }
