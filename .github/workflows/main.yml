@@ -27,7 +27,7 @@ jobs:
             const htmlPath = JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
             const body = JSON.stringify({'text': htmlPath});
             function sendRequest(data) {
-              var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+              var XMLHttpRequest = require('xhr2');
               let xhttp = new XMLHttpRequest();
               xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
