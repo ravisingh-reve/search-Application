@@ -27,15 +27,15 @@ jobs:
             const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
             core.setOutput('htmlPath', htmlPath);
             const body = {'text': htmlPath};
-            fetch('${{secrets.WEB_VITALS_HOOK}}', {
+            const response = await fetch('${{secrets.WEB_VITALS_HOOK}}', {
               Method: 'POST',
               Headers: {
               Accept: 'application.json',
               'Content-Type': 'application/json'
             },
-            Body: body,
-            Cache: 'default'
+            Body: body
             });
+            console.log(response);
       # - name: Deploy Stage
       #   uses: fjogeleit/http-request-action@v1
       #   with:
