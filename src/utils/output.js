@@ -21,8 +21,8 @@ exports.setOutput = async function setOutput(resultsPath) {
   core.setOutput('links', links ? JSON.stringify(links) : '')
   core.setOutput('assertionResults', assertionResults ? JSON.stringify(assertionResults) : '')
   core.setOutput('manifest', manifestResults ? JSON.stringify(manifestResults) : '')
-  core.setOutput('summaryData', manifestResults ? manifestResults : '')
-  core.setOutput('jsonPath', manifestResults ? manifestResults : '')
-  core.setOutput('htmlPath', manifestResults ? manifestResults : '')
-  core.setOutput('actualUrl', manifestResults ? manifestResults : '') 
+  core.setOutput('summaryData', manifestResults ? JSON.stringify(manifestResults) : '')
+  core.setOutput('jsonPath', manifestResults ? JSON.stringify(manifestResults) : '')
+  core.setOutput('htmlPath', manifestResults ? JSON.stringify(manifestResults) : '')
+  core.setOutput('actualUrl', manifestResults ? JSON.stringify(manifestResults) : '') 
 }
