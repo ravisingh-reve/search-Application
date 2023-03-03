@@ -27,5 +27,5 @@ jobs:
           data: |
             {
               "type":"message",
-              "manifest": '${{steps.LHCIAction.outputs.manifest}}'
+              "text": '${{steps.LHCIAction.outputs.manifest}}'
             }
