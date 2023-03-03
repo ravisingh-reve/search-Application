@@ -6,7 +6,6 @@ const { getLinks, getAssertionResults, getManifest } = require('./lhci-helpers')
  *   resultsPath: string
  *   links: Object<url,url> (links.json)
  *   assertionResults: LHCIAssertion[] (assertion-results.json)
- *   manifest: LHCIManifest[] (manifest.json)
  *   htmlPath: LHCIManifest[] (manifest.json)
  * }
  *
