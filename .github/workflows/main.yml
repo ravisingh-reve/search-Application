@@ -27,18 +27,21 @@ jobs:
             const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
             core.setOutput('htmlPath', htmlPath);
             const body = {'text': htmlPath};
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-              if (this.readyState == 4 && this.status == 200) {
-              console.log("Success)
-              }
-            };
-            xhttp.open("POST", '${{secrets.WEB_VITALS_HOOK}}', true);
-            xhttp.setRequestHeader("Content-type", "application/json");
-            xhttp.setRequestHeader("Accept", "application.json");
-            xhttp.send(body);
+            function sendRequest(data) {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                console.log("Success)
+                }
+              };
+              xhttp.open("POST", '${{secrets.WEB_VITALS_HOOK}}', true);
+              xhttp.setRequestHeader("Content-type", "application/json");
+              xhttp.setRequestHeader("Accept", "application.json");
+              xhttp.send(data);
+              console.log(xhttp);
+            }
+            sendRequest(body);
             console.log(body);
-            console.log(xhttp);
       # - name: Deploy Stage
       #   uses: fjogeleit/http-request-action@v1
       #   with:
