@@ -24,4 +24,4 @@ jobs:
           url: '${{secrets.WEB_VITALS_HOOK}}'
           method: POST
           customHeaders: '{"Content-Type": "application/json"}'
-          data: '{"text": "Landing on teams"}'
+          data: '{"text": ${{steps.LHCIAction.outputs.manifest}} }'
