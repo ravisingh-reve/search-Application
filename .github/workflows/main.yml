@@ -38,7 +38,7 @@ jobs:
                           "body":[
                               {
                               "type": "TextBlock",
-                              "text": "Lighthouse report ${{toJSON(steps.LHCIAction.outputs.links)}}"
+                              "text": "Lighthouse report `${{toJSON(steps.LHCIAction.outputs.links)}}`"
                               }
                           ]
                       }
