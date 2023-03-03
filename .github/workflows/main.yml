@@ -2,7 +2,7 @@ name: LHCI-output-webhook
 'on':
   - push
 jobs:
-  perf:
+  lighthouse:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -23,4 +23,4 @@ jobs:
         with:
           webhookUrl: '${{secrets.WEB_VITALS_HOOK}}'
           data: |
-            {"text": "hum land kar rahe hai please help"}
+            [{"text": "hum land kar rahe hai please help"}]
