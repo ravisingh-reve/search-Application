@@ -18,6 +18,14 @@ jobs:
             https://www.tatacliq.com
           uploadArtifacts: true
           temporaryPublicStorage: true
+      - name: Generate URLs
+        id: htmlPath
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          script: |
+            const htmlPath = steps.LHCIAction.outputs.manifest[0].htmlPath
+            core.setOutput('htmlPath', htmlPath);
       - name: Deploy Stage
         uses: fjogeleit/http-request-action@v1
         with:
@@ -38,7 +46,7 @@ jobs:
                           "body":[
                               {
                               "type": "TextBlock",
-                              "text": "Lighthouse Report ${{steps.LHCIAction.outputs.manifest}} ${{steps.LHCIAction.outputs.htmlPath}}"
+                              "text": "Lighthouse Report ${{steps.LHCIAction.outputs.manifest}} ${{steps.htmlPath}}"
                               }
                           ]
                       }
