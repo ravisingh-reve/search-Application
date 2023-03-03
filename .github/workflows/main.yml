@@ -24,7 +24,7 @@ jobs:
         with:
           github-token: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           script: |
-            const htmlPath = JSON.stringify('${{steps.LHCIAction.outputs.manifest[0].htmlPath}}');
+            const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}'));
             console.log('${{steps.LHCIAction.outputs.manifest}}');
             core.setOutput('htmlPath', htmlPath);
       - name: Deploy Stage
