@@ -38,4 +38,9 @@ exports.getAssertionResults = async function getAssertionResults(resultsPath) {
  * @param {string} resultsPath
  */
 
+exports.getManifest = async function getManifest(resultsPath) {
+  const manifestPath = join(resultsPath, 'manifest.json')
+  if (!existsSync(manifestPath)) return null
+  return /** @type {LHCIManifest[]} **/ (JSON.parse(await fs.readFile(manifestPath, 'utf8')))
+}
 
