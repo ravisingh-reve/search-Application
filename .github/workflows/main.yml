@@ -25,20 +25,14 @@ jobs:
           github-token: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           script: |
             const htmlPath = JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
-            const body = JSON.stringify({'text': htmlPath});
+            const body = {'text': htmlPath};
             function sendRequest(data) {
-              var XMLHttpRequest = require('xhr2');
-              let xhttp = new XMLHttpRequest();
-              xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                console.log("Success");
-                }
-              };
-              xhttp.open("POST", '${{secrets.WEB_VITALS_HOOK}}', true);
-              xhttp.setRequestHeader("Content-type", "application/json");
-              xhttp.setRequestHeader("Accept", "application.json");
-              xhttp.send(data);
-              console.log(xhttp);
+              var xhr = new XMLHttpRequest();
+              xhr.open("POST", '${{secrets.WEB_VITALS_HOOK}}', true);
+              xhr.setRequestHeader('Content-Type', 'application/json');
+              xhr.send(JSON.stringify({
+                  data: data
+              }));
             }
             sendRequest(body);
             console.log(body);
