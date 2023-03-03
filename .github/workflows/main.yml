@@ -47,7 +47,7 @@ jobs:
                           "body":[
                               {
                               "type": "TextBlock",
-                              "text": "Lighthouse Report ${{toJSON(steps.htmlPath.outputs.htmlPath)}}"
+                              "text": "Lighthouse Report ${{steps.htmlPath.outputs.htmlPath}}"
                               }
                           ]
                       }
