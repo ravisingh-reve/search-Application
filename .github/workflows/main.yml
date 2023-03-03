@@ -6,10 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js 12.x
+      - name: Use Node.js 16.x
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: 16.x
       - name: Audit URLs using Lighthouse
         id: LHCIAction
         uses: treosh/lighthouse-ci-action@v3
@@ -18,9 +18,10 @@ jobs:
             https://www.tatacliq.com
           uploadArtifacts: true
           temporaryPublicStorage: true
-      - name: Webhook Action for Node
-        uses: denar90/webhook-action@0.1.1
+      - name: Deploy Stage
+        uses: fjogeleit/http-request-action@v1
         with:
-          webhookUrl: '${{secrets.WEB_VITALS_HOOK}}'
-          data: |
-            { "text": "landing" }
+          url: '${{secrets.WEB_VITALS_HOOK}}'
+          method: POST
+          customHeaders: '{"Content-Type": "application/json"}'
+          data: '{"text": "Landing on teams"}'
