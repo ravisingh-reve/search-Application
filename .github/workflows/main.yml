@@ -24,7 +24,7 @@ jobs:
         with:
           github-token: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           script: |
-            const htmlPath = ${{steps.LHCIAction.outputs.manifest[0].htmlPath}}
+            const htmlPath = ${{steps.LHCIAction.outputs.manifest[0].htmlPath}};
             core.setOutput('htmlPath', htmlPath);
       - name: Deploy Stage
         uses: fjogeleit/http-request-action@v1
