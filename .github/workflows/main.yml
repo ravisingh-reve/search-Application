@@ -30,7 +30,7 @@ jobs:
             console.log('links','${{steps.LHCIAction.outputs.links}}');
             console.log('assertionResults','${{steps.LHCIAction.outputs.assertionResults}}');
             console.log('manifest','${{steps.LHCIAction.outputs.manifest}}');
-            const body = {'text': Lighthouse report '['+links+']'+'('+links+')'};
+            const body = {'text': `Lighthouse report [links](links)`};
             function sendRequest(data) {
               fetch('${{secrets.WEB_VITALS_HOOK}}', {
                 method: "POST",
