@@ -25,11 +25,11 @@ jobs:
           github-token: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           script: |
             const htmlPath = JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
-            const performance = JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary.performance * 100;
-            const accessibility = JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary.accessibility * 100;
-            const bestPractices = JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary.best-practices * 100;
-            const seo = JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary.seo * 100;
-            const pwa = JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary.pwa * 100;
+            const performance = JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['performance'] * 100;
+            const accessibility = JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['accessibility'] * 100;
+            const bestPractices = JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['best-practices'] * 100;
+            const seo = JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['seo'] * 100;
+            const pwa = JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['pwa'] * 100;
             const links = JSON.parse('${{steps.LHCIAction.outputs.links}}')['https://www.tatacliq.com/'];
             console.log('resultsPath','${{steps.LHCIAction.outputs.resultsPath}}');
             console.log('links','${{steps.LHCIAction.outputs.links}}');
