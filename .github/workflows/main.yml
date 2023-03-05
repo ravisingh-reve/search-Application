@@ -134,7 +134,7 @@ jobs:
                                                 },
                                                 {
                                                     "title": "PWA:",
-                                                    "value": `${pwa}`
+                                                    "value": `${pwa} %`
                                                 }
                                             ]
                                         }
@@ -145,6 +145,7 @@ jobs:
                     }
                 ]
             }
+
             function sendRequest(data) {
               fetch('${{secrets.WEB_VITALS_HOOK}}', {
                 method: "POST",
