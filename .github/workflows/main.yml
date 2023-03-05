@@ -42,7 +42,7 @@ jobs:
 
             console.log('resultsPath','${{steps.LHCIAction.outputs.resultsPath}}');
             
-            console.log('internel statics',JSON.parse(JSON.stringify('${{steps.LHCIAction.outputs}}')));
+            console.log('internel statics',JSON.parse(JSON.stringify('${{steps}}')));
 
             console.log('links','${{steps.LHCIAction.outputs.links}}');
 
