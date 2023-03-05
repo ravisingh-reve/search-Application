@@ -63,7 +63,7 @@ jobs:
                                     "items": [
                                         {
                                             "type": "TextBlock",
-                                            "text": "Published Lighthouse Report",
+                                            "text": "Published Lighthouse Home Page Report",
                                             "weight": "bolder",
                                             "size": "medium"
                                         },
@@ -97,7 +97,7 @@ jobs:
                                                 {
                                                     "type": "TextBlock",
                                                     "spacing": "none",
-                                                    "text": `${new Date()}`,
+                                                    "text": `Created on ${new Date()}`,
                                                     "isSubtle": true,
                                                     "wrap": true
                                                 }
@@ -118,19 +118,19 @@ jobs:
                                             "facts": [
                                                 {
                                                     "title": "Performance:",
-                                                    "value": `${performance}`
+                                                    "value": `${performance} %`
                                                 },
                                                 {
                                                     "title": "Accessibility:",
-                                                    "value": `${accessibility}`
+                                                    "value": `${accessibility} %`
                                                 },
                                                 {
                                                     "title": "Best practices:",
-                                                    "value": `${bestPractices}`
+                                                    "value": `${bestPractices} %`
                                                 },
                                                 {
                                                     "title": "SEO:",
-                                                    "value": `${seo}`
+                                                    "value": `${seo} %`
                                                 },
                                                 {
                                                     "title": "PWA:",
@@ -140,12 +140,34 @@ jobs:
                                         }
                                     ]
                                 }
+                            ],
+                            "actions": [
+                                {
+                                    "type": "Action.ShowCard",
+                                    "title": "Comment",
+                                    "card": {
+                                        "type": "AdaptiveCard",
+                                        "body": [
+                                            {
+                                                "type": "Input.Text",
+                                                "id": "comment",
+                                                "isMultiline": true,
+                                                "placeholder": "Enter your comment"
+                                            }
+                                        ],
+                                        "actions": [
+                                            {
+                                                "type": "Action.Submit",
+                                                "title": "OK"
+                                            }
+                                        ]
+                                    }
+                                }
                             ]
                         }
                     }
                 ]
             }
-
             function sendRequest(data) {
               fetch('${{secrets.WEB_VITALS_HOOK}}', {
                 method: "POST",
