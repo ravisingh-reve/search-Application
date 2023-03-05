@@ -25,7 +25,10 @@ jobs:
           github-token: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           script: |
             const htmlPath = JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
-            console.log('${{steps.LHCIAction.outputs}}');
+            console.log('resultsPath','${{steps.LHCIAction.outputs.resultsPath}}');
+            console.log('links','${{steps.LHCIAction.outputs.links}}');
+            console.log('assertionResults','${{steps.LHCIAction.outputs.assertionResults}}');
+            console.log('manifest','${{steps.LHCIAction.outputs.manifest}}');
             const body = {'text': htmlPath};
             function sendRequest(data) {
               fetch('${{secrets.WEB_VITALS_HOOK}}', {
