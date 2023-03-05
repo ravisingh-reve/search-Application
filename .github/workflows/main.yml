@@ -158,8 +158,6 @@ jobs:
 
             sendRequest(bodyData);
 
-            console.log(bodyData);
-
           # const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
           # core.setOutput('htmlPath', htmlPath);
       # - name: Deploy Stage
