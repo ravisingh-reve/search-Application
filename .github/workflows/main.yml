@@ -35,7 +35,7 @@ jobs:
             console.log('links','${{steps.LHCIAction.outputs.links}}');
             console.log('assertionResults','${{steps.LHCIAction.outputs.assertionResults}}');
             console.log('manifest','${{steps.LHCIAction.outputs.manifest}}');
-            const body = {
+            const bodyData = {
               "contentType": "application/vnd.microsoft.card.adaptive",
               "content": {
                 "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
@@ -131,13 +131,13 @@ jobs:
               fetch('${{secrets.WEB_VITALS_HOOK}}', {
                 method: "POST",
                 headers: {'Content-Type': 'application/json'}, 
-                body: data
+                body: JSON.stringify(data)
               }).then(res => {
                 console.log("Request complete! response:", res);
               });
             }
-            sendRequest(body);
-            console.log(body);
+            sendRequest(bodyData);
+            console.log(bodyData);
           # const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
           # core.setOutput('htmlPath', htmlPath);
       # - name: Deploy Stage
