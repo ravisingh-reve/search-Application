@@ -160,6 +160,14 @@ jobs:
 
             sendRequest(bodyData);
 
+        - uses: actions/github-script@v6
+            id: set-result
+            with:
+                script: return "Hello!"
+                result-encoding: string
+            - name: Get result
+            run: echo "${{steps.set-result.outputs.result}}"
+
           # const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
           # core.setOutput('htmlPath', htmlPath);
       # - name: Deploy Stage
