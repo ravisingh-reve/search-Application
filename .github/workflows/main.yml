@@ -28,6 +28,9 @@ jobs:
             const htmlPath =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
 
+            const jsonPath =
+            JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].jsonPath;
+
             const performance =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['performance']
             * 100;
@@ -166,8 +169,15 @@ jobs:
                 console.log("Request complete! response:", res);
               });
             }
-
             sendRequest(bodyData);
+
+            function jsonRequest(jsonPath) {
+              fetch(jsonPath, {
+                .then((response) => response.json())
+                .then((json) => console.log(json));
+                })
+            }
+            jsonRequest(jsonPath);
 
           # const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
           # core.setOutput('htmlPath', htmlPath);
