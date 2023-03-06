@@ -2,7 +2,7 @@
   "ci": {
     "assert": {
       "assertions": {
-        "first-contentful-paint": "on"
+        "first-contentful-paint": true
       }
     }
   }
