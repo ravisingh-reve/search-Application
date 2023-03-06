@@ -58,7 +58,7 @@ jobs:
 
             console.log('links','${{steps.LHCIAction.outputs.links}}');
 
-            console.log('jsonPath',jsonPath);
+            console.log('jsonPath',JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].jsonPath);
 
             console.log('assertionResults','${{steps.LHCIAction.outputs.assertionResults}}');
 
@@ -179,7 +179,7 @@ jobs:
                 .then((json) => console.log(json));
             }
               
-            jsonRequest(jsonPath);
+            jsonRequest(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].jsonPath);
 
           # const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
           # core.setOutput('htmlPath', htmlPath);
