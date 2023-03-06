@@ -179,7 +179,7 @@ jobs:
                 .then((json) => console.log(json));
             }
               
-            jsonRequest(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].jsonPath);
+            jsonRequest("/home/runner/work/search-Application/search-Application/.lighthouseci/www_tatacliq_com-_-2023_03_06_12_49_24.report.json");
 
           # const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
           # core.setOutput('htmlPath', htmlPath);
