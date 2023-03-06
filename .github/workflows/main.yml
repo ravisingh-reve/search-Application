@@ -59,6 +59,7 @@ jobs:
             console.log('links','${{steps.LHCIAction.outputs.links}}');
 
             console.log('assertionResults','${{steps.LHCIAction.outputs.assertionResults}}');
+            console.log('assert','${{steps.LHCIAction.outputs.assert}}');
 
             console.log('manifest','${{steps.LHCIAction.outputs.manifest}}');
 
