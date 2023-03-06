@@ -57,7 +57,7 @@ jobs:
             console.log('resultsPath','${{steps.LHCIAction.outputs.resultsPath}}');
 
             console.log('links','${{steps.LHCIAction.outputs.links}}');
-            
+
             console.log('jsonPath',jsonPath);
 
             console.log('assertionResults','${{steps.LHCIAction.outputs.assertionResults}}');
@@ -173,8 +173,12 @@ jobs:
             }
             sendRequest(bodyData);
 
-            function jsonRequest(jsonPath) {
-              fetch(jsonPath, {.then((response) => response.json()).then((json) => console.log(json));})}
+            function jsonRequest(path) {
+              fetch(path)
+                .then((response) => response.json())
+                .then((json) => console.log(json));
+            }
+              
             jsonRequest(jsonPath);
 
           # const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
