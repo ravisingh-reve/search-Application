@@ -53,7 +53,7 @@ jobs:
 
             console.log('resultsPath','${{steps.LHCIAction.outputs.resultsPath}}');
 
-            const LHCIAction = JSON.parse('${{steps.LHCIAction.outputs.manifest}}');
+            const LHCIAction = JSON.parse('${{steps.LHCIAction.outputs}}');
             console.log('internel statics',LHCIAction);
 
             console.log('links','${{steps.LHCIAction.outputs.links}}');
