@@ -16,9 +16,9 @@ jobs:
         with:
           urls: |
             'https://www.tatacliq.com'
-        configPath: ./lighthouserc.json
-        uploadArtifacts: true
-        temporaryPublicStorage: true
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
       - name: Generate URLs
         id: htmlPath
         uses: actions/github-script@v6
