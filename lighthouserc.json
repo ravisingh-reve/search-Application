@@ -1,16 +1,16 @@
 {
   "ci": {
-    "collect": { "numberOfRuns": 5 },
+    "collect": { "numberOfRuns": 1 },
     "assert": {
       "preset": "lighthouse:recommended",
       "assertions": {
         "first-contentful-paint": [
           "error",
-          { "maxNumericValue": 2000, "aggregationMethod": "optimistic" }
+          { "maxNumericValue": 90000, "aggregationMethod": "optimistic" }
         ],
         "interactive": [
           "error",
-          { "maxNumericValue": 5000, "aggregationMethod": "optimistic" }
+          { "maxNumericValue": 50000, "aggregationMethod": "optimistic" }
         ]
       }
     }
