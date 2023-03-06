@@ -121,6 +121,8 @@ main()
  */
 
 function runChildCommand(command, args = []) {
+  console.log("command", command);
+  console.log("args", args);
   const combinedArgs = [lhciCliPath, command, ...args]
   const { status = -1 } = childProcess.spawnSync(process.argv[0], combinedArgs, {
     stdio: 'inherit',
