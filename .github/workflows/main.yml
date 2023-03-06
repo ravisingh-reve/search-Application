@@ -12,11 +12,11 @@ jobs:
           node-version: 16.x
       - name: Audit URLs using Lighthouse
         id: LHCIAction
-        uses: treosh/lighthouse-ci-action@v3
+        uses: treosh/lighthouse-ci-action@v9
         with:
           urls: |
             'https://www.tatacliq.com'
-          configPath: './lighthouserc.json'
+          configPath: ./lighthouserc.json
           uploadArtifacts: true
           temporaryPublicStorage: true
       - name: Generate URLs
