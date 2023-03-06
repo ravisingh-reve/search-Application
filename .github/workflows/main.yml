@@ -17,6 +17,7 @@ jobs:
           urls: |
             'https://www.tatacliq.com'
           budgetPath: '.github/lighthouse/budget.json'
+          uploadArtifacts: true
           temporaryPublicStorage: true
       - name: Upload artifact
         uses: actions/upload-artifact@v3
