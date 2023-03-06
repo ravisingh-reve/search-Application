@@ -19,7 +19,7 @@ jobs:
           budgetPath: '.github/lighthouse/budget.json'
           temporaryPublicStorage: true
       - name: Upload artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: tatcliq-reports
           path: .github/**
