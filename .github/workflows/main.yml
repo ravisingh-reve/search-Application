@@ -22,7 +22,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: tatcliq-reports
-          path: /
+          path: src/
       - name: Generate URLs
         id: htmlPath
         uses: actions/github-script@v6
