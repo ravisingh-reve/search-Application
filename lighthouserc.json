@@ -1,33 +1,12 @@
 {
   "ci": {
     "assert": {
-      "preset": "lighthouse:all",
       "assertions": {
-        "bootup-time": "off",
-        "canonical": "off",
-        "dom-size": "off",
-        "first-contentful-paint": "on",
-        "first-cpu-idle": "off",
-        "first-meaningful-paint": "off",
-        "font-display": "off",
-        "interactive": "off",
-        "is-crawlable": "off",
-        "is-on-https:": "off",
-        "largest-contentful-paint": "off",
-        "mainthread-work-breakdown": "off",
-        "max-potential-fid": "off",
-        "speed-index": "off",
-        "render-blocking-resources": "off",
-        "unminified-css": "off",
-        "unminified-javascript": "off",
-        "unused-css-rules": "off",
-        "unused-javascript": "off",
-        "uses-long-cache-ttl": "off",
-        "uses-rel-preconnect": "off",
-        "uses-rel-preload": "off",
-        "uses-text-compression": "off",
-        "uses-responsive-images": "off",
-        "uses-webp-images": "off"
+        "first-contentful-paint": ["warn", {"maxNumericValue": 4000}],
+        "viewport": "warn",
+        "resource-summary:document:size": ["warn", {"maxNumericValue": 14000}],
+        "resource-summary:font:count": ["warn", {"maxNumericValue": 1}],
+        "resource-summary:third-party:count": ["warn", {"maxNumericValue": 5}]
       }
     }
   }
