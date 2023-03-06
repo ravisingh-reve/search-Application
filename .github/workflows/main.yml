@@ -53,13 +53,12 @@ jobs:
 
             console.log('resultsPath','${{steps.LHCIAction.outputs.resultsPath}}');
 
-            console.log('internel
-            statics',JSON.stringify('${{steps.LHCIAction.outputs}}'));
+            const LHCIAction = JSON.parse('${{steps.LHCIAction.outputs.manifest}}');
+            console.log('internel statics',LHCIAction);
 
             console.log('links','${{steps.LHCIAction.outputs.links}}');
 
             console.log('assertionResults','${{steps.LHCIAction.outputs.assertionResults}}');
-            console.log('assert','${{steps.LHCIAction.outputs.assert}}');
 
             console.log('manifest','${{steps.LHCIAction.outputs.manifest}}');
 
