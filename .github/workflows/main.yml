@@ -12,7 +12,7 @@ jobs:
           node-version: 16.x
       - name: Audit URLs using Lighthouse
         id: LHCIAction
-        uses: treosh/lighthouse-ci-action@v8
+        uses: treosh/lighthouse-ci-action@v3
         with:
           urls: |
             'https://www.tatacliq.com'
