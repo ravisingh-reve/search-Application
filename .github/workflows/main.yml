@@ -17,8 +17,12 @@ jobs:
           urls: |
             'https://www.tatacliq.com'
           budgetPath: '.github/lighthouse/budget.json'
-          uploadArtifacts: true
           temporaryPublicStorage: true
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: tatcliq-reports
+          path: ./tatcliq-reports/**
       - name: Generate URLs
         id: htmlPath
         uses: actions/github-script@v6
@@ -27,9 +31,6 @@ jobs:
           script: >
             const htmlPath =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
-
-            const jsonPath =
-            JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].jsonPath;
 
             const performance =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['performance']
@@ -57,8 +58,6 @@ jobs:
             console.log('resultsPath','${{steps.LHCIAction.outputs.resultsPath}}');
 
             console.log('links','${{steps.LHCIAction.outputs.links}}');
-
-            console.log('jsonPath',JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].jsonPath);
 
             console.log('assertionResults','${{steps.LHCIAction.outputs.assertionResults}}');
 
@@ -172,15 +171,6 @@ jobs:
               });
             }
             sendRequest(bodyData);
-
-            function jsonRequest(path) {
-              fetch(path)
-                .then((response) => response.json())
-                .then((json) => console.log(json));
-            }
-              
-            jsonRequest("/home/runner/work/search-Application/search-Application/.lighthouseci/www_tatacliq_com-_-2023_03_06_12_49_24.report.json");
-
           # const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
           # core.setOutput('htmlPath', htmlPath);
       # - name: Deploy Stage
