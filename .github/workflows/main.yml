@@ -16,22 +16,8 @@ jobs:
         with:
           urls: |
             'https://www.tatacliq.com'
-          budgetPath: '.github/lighthouse/budget.json'
+          configPath: './lighthouserc.json'
           
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: homework
-          path: report.jsom
-          
-      - name: Download math result for job 1
-        uses: actions/download-artifact@v3
-        with:
-          name: report
-      - shell: bash
-        run: |
-          value=`cat report.json`
-          expr $value
       - name: Generate URLs
         id: htmlPath
         uses: actions/github-script@v6
