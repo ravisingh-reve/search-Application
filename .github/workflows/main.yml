@@ -17,12 +17,17 @@ jobs:
           urls: |
             'https://www.tatacliq.com'
           budgetPath: '.github/lighthouse/budget.json'
-          uploadArtifacts: true
-          temporaryPublicStorage: true
+          
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: homework
+          path: report.jsom
+          
       - name: Download math result for job 1
         uses: actions/download-artifact@v3
         with:
-          name: /home/runner/work/search-Application/search-Application/.lighthouseci/www_tatacliq_com-_-2023_03_06_13_39_22.report.json
+          name: report
       - shell: bash
         run: |
           value=`cat report.json`
