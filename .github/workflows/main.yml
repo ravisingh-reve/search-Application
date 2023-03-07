@@ -22,7 +22,7 @@ jobs:
       - name: Download math result for job 1
         uses: actions/download-artifact@v3
         with:
-          name: homework
+          name: report
       - shell: bash
         run: |
           value=`cat report.json`
