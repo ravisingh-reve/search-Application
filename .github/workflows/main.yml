@@ -15,9 +15,7 @@ jobs:
         uses: treosh/lighthouse-ci-action@v9
         with:
           urls: |
-            'https://www.tatacliq.com'
-          configPath: './lighthouserc.json'
-          
+            'https://www.tatacliq.com' 
       - name: Generate URLs
         id: htmlPath
         uses: actions/github-script@v6
@@ -57,6 +55,8 @@ jobs:
             console.log('assertionResults','${{steps.LHCIAction.outputs.assertionResults}}');
 
             console.log('manifest','${{steps.LHCIAction.outputs.manifest}}');
+            
+            console.log('matrics data','${{steps.LHCIAction}}');
 
             const bodyData = {
                 "type": "message",
