@@ -22,7 +22,7 @@ jobs:
       - name: Download math result for job 1
         uses: actions/download-artifact@v3
         with:
-          name: report
+          name: /home/runner/work/search-Application/search-Application/.lighthouseci/www_tatacliq_com-_-2023_03_06_13_39_22.report.json
       - shell: bash
         run: |
           value=`cat report.json`
