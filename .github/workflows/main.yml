@@ -18,6 +18,7 @@ jobs:
             'https://www.tatacliq.com'
           budgetPath: '.github/lighthouse/budget.json'
           uploadArtifacts: true
+          temporaryPublicStorage: true
       - name: Generate URLs
         id: htmlPath
         uses: actions/github-script@v6
@@ -144,7 +145,6 @@ jobs:
                     }
                 ]
             }
-
             function sendRequest(data) {
               fetch('${{secrets.WEB_VITALS_HOOK}}', {
                 method: "POST",
