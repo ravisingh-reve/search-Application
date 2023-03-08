@@ -165,7 +165,7 @@ jobs:
                     }
                 ]
             }
-            var json = require('${{ steps.lighthouse.outputs.resultsPath }}/lhr-*.json')
+            const json = require('${{ steps.lighthouse.outputs.resultsPath }}/lhr-*.json')
             console.log("json file", json)
             
             function sendRequest(data) {
