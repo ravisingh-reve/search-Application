@@ -16,6 +16,7 @@ jobs:
         with:
           urls: |
             'https://www.tatacliq.com' 
+          uploadArtifacts: true
             
       - name: Generate URLs
         id: htmlPath
