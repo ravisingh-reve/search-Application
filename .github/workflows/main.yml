@@ -26,6 +26,7 @@ jobs:
       - shell: bash
         run: |
             ls
+            cd
       - name: Generate URLs
         id: htmlPath
         uses: actions/github-script@v6
