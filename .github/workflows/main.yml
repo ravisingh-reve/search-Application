@@ -165,7 +165,9 @@ jobs:
                     }
                 ]
             }
-
+            var json = require('${{ steps.lighthouse.outputs.resultsPath }}/lhr-*.json')
+            console.log("json file", json)
+            
             function sendRequest(data) {
               fetch('${{secrets.WEB_VITALS_HOOK}}', {
                 method: "POST",
@@ -176,16 +178,7 @@ jobs:
               });
             }
             sendRequest(bodyData);
-              function artifactRequest() {
-              fetch('${{ steps.lighthouse.outputs.resultsPath }}/lhr-*.json', {
-                method: "GET",
-                headers: {'Content-Type': 'application/json'}, 
-                
-              }).then(res => {
-                console.log("artifactRequest complete! response:", res);
-              });
-            }
-            artifactRequest();
+             
             
           # const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
           # core.setOutput('htmlPath', htmlPath);
