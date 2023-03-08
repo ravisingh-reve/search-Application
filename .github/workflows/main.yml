@@ -34,7 +34,7 @@ jobs:
           script: >
            const { Octokit } = require("octokit");
            const octokit = new Octokit({
-            auth: '${{secrets.LHCI_GITHUB_APP_TOKEN}}'
+            auth: '${{LHCI_GITHUB_APP_TOKEN}}'
            });
            const file = Math.floor(new Date().getTime());
            await octokit.request(`GET /repos/ravisingh-reve/search-Application/actions/lighthouse-results/lhr-*.json`, {
