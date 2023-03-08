@@ -178,14 +178,15 @@ jobs:
             sendRequest(bodyData);
               function artifactRequest() {
               fetch('${{ steps.lighthouse.outputs.resultsPath }}/lhr-*.json', {
-                method: "POST",
+                method: "GET",
                 headers: {'Content-Type': 'application/json'}, 
-                body: JSON.stringify(data)
+                
               }).then(res => {
                 console.log("artifactRequest complete! response:", res);
               });
             }
             artifactRequest();
+            
           # const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
           # core.setOutput('htmlPath', htmlPath);
       # - name: Deploy Stage
