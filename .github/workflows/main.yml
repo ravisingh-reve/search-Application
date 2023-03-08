@@ -32,6 +32,8 @@ jobs:
         with:
           github-token: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
           script: >
+           <script 
+           type="module">
            import { Octokit } from "https://cdn.skypack.dev/octokit";
 
            const octokit = new Octokit({
@@ -46,6 +48,9 @@ jobs:
             }
             })
             console.log('octokit',octokit);
+
+           </script>
+
             const htmlPath =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
 
