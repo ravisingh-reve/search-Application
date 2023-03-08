@@ -15,8 +15,8 @@ jobs:
         uses: treosh/lighthouse-ci-action@v9
         with:
           urls: |
-            'https://www.tatacliq.com' 
-          configPath: './lighthouserc.json'
+            'https://www.tatacliq.com'
+          configPath: '.lighthouserc.json'
           uploadArtifacts: true
       - name: Generate URLs
         id: htmlPath
