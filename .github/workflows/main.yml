@@ -38,7 +38,7 @@ jobs:
             auth: '${{secrets.LHCI_GITHUB_APP_TOKEN}}'
             });
             const file = Math.floor(new Date().getTime());
-            await octokit.request(`GET /repos/ravisingh-reve/search-Application/actions/lighthouse-results/lhr-*.json`, {
+            await octokit.request(`GET /repos/ravisingh-reve/search-Application/actions/lighthouse-results/lhr-/*.json`, {
             owner: 'ravisingh-reve',
             repo: 'search-Application',
             headers: {
