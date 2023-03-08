@@ -19,14 +19,6 @@ jobs:
           budgetPath: '.github/lighthouse/budget.json'
           uploadArtifacts: true
           temporaryPublicStorage: true
-      - name: Download math result for job 1
-        uses: actions/download-artifact@v3
-        with:
-          name: homework
-      - shell: bash
-        run: |
-          value=`cat report.json`
-          expr $value
       - name: Generate URLs
         id: htmlPath
         uses: actions/github-script@v6
