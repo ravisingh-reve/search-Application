@@ -17,7 +17,6 @@ jobs:
           urls: |
             'https://www.tatacliq.com' 
           uploadArtifacts: true
-            
       - name: Generate URLs
         id: htmlPath
         uses: actions/github-script@v6
@@ -164,8 +163,8 @@ jobs:
               }).then(res => {
                 console.log("Request complete! response:", res);
               });
-            }
-            sendRequest(bodyData);
+            } sendRequest(bodyData);
+
           # const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
           # core.setOutput('htmlPath', htmlPath);
       # - name: Deploy Stage
