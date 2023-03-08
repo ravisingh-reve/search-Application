@@ -44,7 +44,7 @@ jobs:
                 
                  rawFile.send(null);
              }
-            readTextFile(${{ steps.lighthouse.outputs.resultsPath }}/lhr-*.json, function(text){
+            readTextFile('${{ steps.lighthouse.outputs.resultsPath }}'+'/'+'lhr'-*.json, function(text){
                 var data = JSON.parse(text);
                 console.log(data);
             });
