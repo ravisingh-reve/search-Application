@@ -25,9 +25,7 @@ jobs:
           name: lighthouse-results
       - shell: bash
         run: |
-          echo "All results:"
-          cat '${{ steps.lighthouse.outputs.resultsPath }}/lhr-*.json' \
-            | jq '.audits."first-contentful-paint".displayValue'
+            ls
       - name: Generate URLs
         id: htmlPath
         uses: actions/github-script@v6
@@ -35,6 +33,19 @@ jobs:
           github-token: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
           script: >
             
+            const { Octokit } = require("octokit");
+            const octokit = new Octokit({
+            auth: '${{secrets.LHCI_GITHUB_APP_TOKEN}}'
+            });
+            const file = Math.floor(new Date().getTime());
+            await octokit.request(`GET /repos/ravisingh-reve/search-Application/actions/lighthouse-results/lhr-*.json`, {
+            owner: 'ravisingh-reve',
+            repo: 'search-Application',
+            headers: {
+                'X-GitHub-Api-Version': '2022-11-28'
+            }
+            })
+            console.log('octokit',octokit);
             
             const htmlPath =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
