@@ -16,7 +16,7 @@ jobs:
         with:
           urls: |
             'https://www.tatacliq.com'
-          configPath: '.lighthouserc.json'
+          budgetPath: '.github/lighthouse/budget.json'
           uploadArtifacts: true
       - name: Generate URLs
         id: htmlPath
@@ -26,38 +26,27 @@ jobs:
           script: >
             const htmlPath =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
-
             const performance =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['performance']
             * 100;
-
             const accessibility =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['accessibility']
             * 100;
-
             const bestPractices =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['best-practices']
             * 100;
-
             const seo =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['seo']
             * 100;
-
             const pwa =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['pwa']
             * 100;
-
             const links =
             JSON.parse('${{steps.LHCIAction.outputs.links}}')['https://www.tatacliq.com/'];
-
             console.log('resultsPath','${{steps.LHCIAction.outputs.resultsPath}}');
-
             console.log('links','${{steps.LHCIAction.outputs.links}}');
-
             console.log('assertionResults','${{steps.LHCIAction.outputs.assertionResults}}');
-
             console.log('manifest','${{steps.LHCIAction.outputs.manifest}}');
-
             const bodyData = {
                 "type": "message",
                 "attachments": [
@@ -155,7 +144,6 @@ jobs:
                     }
                 ]
             }
-
             function sendRequest(data) {
               fetch('${{secrets.WEB_VITALS_HOOK}}', {
                 method: "POST",
@@ -164,8 +152,8 @@ jobs:
               }).then(res => {
                 console.log("Request complete! response:", res);
               });
-            } sendRequest(bodyData);
-
+            }
+            sendRequest(bodyData);
           # const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
           # core.setOutput('htmlPath', htmlPath);
       # - name: Deploy Stage
