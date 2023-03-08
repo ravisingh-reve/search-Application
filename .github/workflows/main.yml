@@ -25,8 +25,7 @@ jobs:
           name: lighthouse-results
       - shell: bash
         run: |
-          value=`cat report.json`
-          expr $value
+            ls
       - name: Generate URLs
         id: htmlPath
         uses: actions/github-script@v6
