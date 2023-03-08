@@ -17,6 +17,7 @@ jobs:
           urls: |
             'https://www.tatacliq.com'
           budgetPath: '.github/lighthouse/budget.json'
+          name: siteReport
           uploadArtifacts: true
           temporaryPublicStorage: true
       - name: Get lighthouse report 
