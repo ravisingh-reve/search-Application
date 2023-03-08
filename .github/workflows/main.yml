@@ -23,7 +23,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: lighthouse-results
-          itemPattern: lhr-?.json
       - shell: bash
         run: |
             ls
@@ -33,9 +32,18 @@ jobs:
         with:
           github-token: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
           script: >
-            const dataJson = require('lhr-1678285195626.json');
-            console.log(JSON.stringify(dataJson));
-
+           const octokit = new Octokit({
+            auth: '${{secrets.LHCI_GITHUB_APP_TOKEN}}'
+           })
+           const file = Math.floor(new Date().getTime());
+           await octokit.request(`GET /repos/ravisingh-reve/search-Application/actions/lighthouse-results/lhr-${file}.json`, {
+            owner: 'ravisingh-reve',
+            repo: 'search-Application',
+            headers: {
+                'X-GitHub-Api-Version': '2022-11-28'
+            }
+            })
+            console.log('octokit',octokit);
             const htmlPath =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
 
