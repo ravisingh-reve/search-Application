@@ -25,7 +25,7 @@ jobs:
           name: lighthouse-results
       - shell: bash
         run: |
-            ll
+            ls -R
       - name: Generate URLs
         id: htmlPath
         uses: actions/github-script@v6
