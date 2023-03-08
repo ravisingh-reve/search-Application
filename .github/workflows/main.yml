@@ -152,7 +152,7 @@ jobs:
                 body: JSON.stringify(data)
               }).then(res => {
                 console.log("Request complete! response:", res);
-              });
+              })
             }
             sendRequest(bodyData);
           # const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
