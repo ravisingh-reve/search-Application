@@ -32,6 +32,9 @@ jobs:
         with:
           github-token: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
           script: >
+            const dataJson = require('lhr-1678285195626.json');
+            console.log(JSON.stringify(dataJson));
+
             const htmlPath =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
 
