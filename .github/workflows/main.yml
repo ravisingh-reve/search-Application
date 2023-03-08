@@ -32,7 +32,10 @@ jobs:
         with:
           github-token: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
           script: >
-           
+           run: |
+           echo "All results:"
+           cat ${{ steps.lighthouse.outputs.resultsPath }}/lhr-*.json \
+            | jq '.audits."first-contentful-paint".displayValue'
 
             const htmlPath =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
@@ -165,8 +168,6 @@ jobs:
                     }
                 ]
             }
-          
-            console.log("json file", '${{ steps.lighthouse.outputs.resultsPath }}/lhr-*.json')
             
             function sendRequest(data) {
               fetch('${{secrets.WEB_VITALS_HOOK}}', {
