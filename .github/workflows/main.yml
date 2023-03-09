@@ -33,8 +33,7 @@ jobs:
       - name: Set up environment
         shell: bash
         run: |
-          npm install glob || { echo "Failed to install glob"; exit 1; }
-          global.glob = require("glob");
+            global.glob=$(node -p "require('glob')")
           
       - name: Send lighthouse report
         uses: actions/github-script@v6
