@@ -17,7 +17,7 @@ jobs:
         with:
           urls: |
             'https://www.tatacliq.com'
-          github-token: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
+          serverToken: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
           temporaryPublicStorage: true
           artifactName: lighthouse-results
           runs: |
