@@ -24,7 +24,6 @@ jobs:
         with:
           name: lighthouse-results
       - shell: bash
-        id: output-data
         run: |
             find / -type f -name "lhr-*.json" -exec cat {} \; -quit
       - name: Generate URLs
@@ -32,7 +31,6 @@ jobs:
         with:
           github-token: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
           script: >
-            console.log('output-data', '${{steps.output-data.outputs}}')
             const { Octokit } = require("octokit");
             const octokit = new Octokit({
             auth: '${{secrets.LHCI_GITHUB_APP_TOKEN}}',
