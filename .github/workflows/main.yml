@@ -25,7 +25,6 @@ jobs:
           name: lighthouse-results
       - shell: bash
         run: |
-            ls
             find . * | grep -P '^lhr\-\d+\.json$'
       - name: Generate URLs
         id: htmlPath
