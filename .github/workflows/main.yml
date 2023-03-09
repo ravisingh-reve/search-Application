@@ -22,14 +22,14 @@ jobs:
       - shell: bash
         run: |
             ls
-
+        
       - name: Generate URLs
         uses: actions/github-script@v6
         with:
           github-token: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
           script: >
             const fs = require('fs');
-            const report = JSON.parse(fs.readFileSync('./lighthouse-report.json', 'utf8'));
+            const report = fs.readFileSync('./lighthouse-report.json', 'utf8');
             console.log(report);
             const metrics = report.categories.performance;
             const score = metrics.score;
