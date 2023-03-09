@@ -39,7 +39,7 @@ jobs:
             });
             const file = Math.floor(new Date().getTime());
             await octokit.request(
-            `GET /repos/ravisingh-reve/search-Application/actions/lighthouse-results/${{'lhr-*.json'}}`,
+            `GET /repos/ravisingh-reve/search-Application/actions/lighthouse-results`,
             {
                 owner: 'ravisingh-reve',
                 repo: 'search-Application',
