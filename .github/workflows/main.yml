@@ -19,6 +19,10 @@ jobs:
       - name: Run Lighthouse audit
         run: npx lighthouse-ci https://www.tatacliq.com --output=json --output-path=lighthouse-report.json
 
+      - shell: bash
+        run: |
+            ls
+
       - name: Generate URLs
         uses: actions/github-script@v6
         with:
