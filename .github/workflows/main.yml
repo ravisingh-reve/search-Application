@@ -21,14 +21,15 @@ jobs:
           uploadArtifacts: true
           artifactName: lighthouse-results
 
-      - name: Get lighthouse report 
+      - name: Download artifacts
         uses: actions/download-artifact@v3
         with:
           name: lighthouse-results
-      - shell: bash
+          path: lighthouse-results
+      - name: List artifact files
         run: |
-            ls
-      - name: Generate URLs
+          ls -l my-artifact
+      - name: Send lighthouse report
         uses: actions/github-script@v6
         with:
           github-token: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
