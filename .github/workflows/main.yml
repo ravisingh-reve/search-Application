@@ -26,6 +26,11 @@ jobs:
       - shell: bash
         run: |
             find . * | grep -P '^lhr\-\d+\.json$'
+      - name: Print first contentful paint metrics
+        run: |
+          echo "All results:"
+          cat ${{ steps.lighthouse.outputs.resultsPath }}/lhr-*.json \
+            | jq '.audits."first-contentful-paint".displayValue'
       - name: Generate URLs
         id: htmlPath
         uses: actions/github-script@v6
