@@ -21,7 +21,7 @@ jobs:
 
       - name: Parse Lighthouse report
         run: |
-          const fs = require('fs');
+          const fs = require("fs");
           const report = JSON.parse(fs.readFileSync('./lighthouse-report.json', 'utf8'));
           console.log(report);
           const metrics = report.categories.performance;
