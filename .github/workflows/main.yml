@@ -24,16 +24,15 @@ jobs:
         with:
           name: lighthouse-results
       - shell: bash
+        id: output-data
         run: |
-            find . * | grep -P '^lhr\-\d+\.json$'
             find / -type f -name "lhr-*.json" -exec cat {} \; -quit
       - name: Generate URLs
-        id: htmlPath
         uses: actions/github-script@v6
         with:
           github-token: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
           script: >
-            
+            console.log('output-data', '${{steps.output-data.outputs}}')
             const { Octokit } = require("octokit");
             const octokit = new Octokit({
             auth: '${{secrets.LHCI_GITHUB_APP_TOKEN}}',
