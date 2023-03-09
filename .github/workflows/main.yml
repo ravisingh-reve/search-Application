@@ -42,7 +42,7 @@ jobs:
             const filePath = path.join(artifactPath, matchingFiles[0]);
             const content = fs.readFileSync(filePath);
 
-            const fcp = JSON.parse(content).['audits'].['first-contentful-paint'].['displayValue'];
+            const fcp = JSON.parse(content).audits.first-contentful-paint.displayValue;
             console.log(`fcp ${fcp}`);
 
             const htmlPath =
@@ -64,6 +64,7 @@ jobs:
             * 100;
             const links =
             JSON.parse('${{steps.LHCIAction.outputs.links}}')['https://www.tatacliq.com/'];
+            console.log('${{steps.LHCIAction.outputs}}'.toString());
             console.log('resultsPath','${{steps.LHCIAction.outputs.resultsPath}}');
             console.log('links','${{steps.LHCIAction.outputs.links}}');
             console.log('assertionResults','${{steps.LHCIAction.outputs.assertionResults}}');
