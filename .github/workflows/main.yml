@@ -28,7 +28,7 @@ jobs:
           path: lighthouse-results
       - name: List artifact files
         run: |
-          ls -l my-artifact
+          ls -l lighthouse-results
       - name: Send lighthouse report
         uses: actions/github-script@v6
         with:
