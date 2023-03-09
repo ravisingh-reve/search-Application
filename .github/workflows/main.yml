@@ -28,7 +28,6 @@ jobs:
       - shell: bash
         run: |
             ls
-            find / -type f -name "lhr-*.json" -exec cat {} \; -quit
       - name: Generate URLs
         uses: actions/github-script@v6
         with:
@@ -40,7 +39,7 @@ jobs:
             });
             const file = Math.floor(new Date().getTime());
             await octokit.request(
-            `GET /repos/ravisingh-reve/search-Application/actions/lighthouse-results/+'^lhr\-\d+\.json$'`,
+            `GET /repos/ravisingh-reve/search-Application/actions/lighthouse-results/${{'lhr-*.json'}}`,
             {
                 owner: 'ravisingh-reve',
                 repo: 'search-Application',
