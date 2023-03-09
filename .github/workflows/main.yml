@@ -44,7 +44,10 @@ jobs:
             const data = JSON.parse(jsonString);
 
             const fcp = data.audits['first-contentful-paint'].displayValue;
-            console.log(`fcp ${fcp}`);
+            const lcp = data.audits['largest-contentful-paint'].displayValue;
+            const fmp = data.audits['first-meaningful-paint'].displayValue;
+            const tbt = data.audits['total-blocking-time'].displayValue;
+            const si = data.audits['speed-index'].displayValue;
 
             const htmlPath =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
@@ -156,6 +159,26 @@ jobs:
                                                 {
                                                     "title": "PWA:",
                                                     "value": `${pwa} %`
+                                                },
+                                                {
+                                                    "title": "First Contentful Paint:",
+                                                    "value": `${fcp}`
+                                                },
+                                                {
+                                                    "title": "Largest Contentful Paint:",
+                                                    "value": `${lcp}`
+                                                },
+                                                {
+                                                    "title": "First Meaningful Paint:",
+                                                    "value": `${fmp}`
+                                                },
+                                                {
+                                                    "title": "Total Blocking Time:",
+                                                    "value": `${tbt}`
+                                                },
+                                                {
+                                                    "title": "Speed Index:",
+                                                    "value": `${si}`
                                                 }
                                             ]
                                         }
