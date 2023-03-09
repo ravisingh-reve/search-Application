@@ -37,11 +37,9 @@ jobs:
             const fs = require("fs");
             const glob = require("glob");
 
-            // Find matching file paths using regex
             const regex = "lhr-*.json";
             const filePaths = glob.sync("./lighthouse-results/**/*").filter(path => regex.test(path));
 
-            // Read file contents and log them
             for (const filePath of filePaths) {
               const fileContents = fs.readFileSync(filePath, "utf8");
               console.log(fileContents);
