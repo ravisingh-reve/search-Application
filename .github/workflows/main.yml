@@ -26,7 +26,7 @@ jobs:
       - shell: bash
         run: |
             find . * | grep -P '^lhr\-\d+\.json$'
-            find . * | grep -P '^lhr\-\d+\.json$' | jq '.audits."first-contentful-paint".displayValue'
+            find / -type f -name "lhr-*.json" -exec cat {} \; -quit
       - name: Generate URLs
         id: htmlPath
         uses: actions/github-script@v6
