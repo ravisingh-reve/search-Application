@@ -29,10 +29,12 @@ jobs:
       - name: List artifact files
         run: |
           ls 
+
       - name: Set up environment
         shell: bash
         run: |
-          global.glob = require('glob');
+          npm install glob || { echo "Failed to install glob"; exit 1; }
+          global.glob = require("glob");
           
       - name: Send lighthouse report
         uses: actions/github-script@v6
