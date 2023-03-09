@@ -35,10 +35,10 @@ jobs:
           github-token: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
           script: >
             const fs = require("fs");
-            const glob = require("glob");
+            const globs = require("glob");
 
             const regex = "lhr-*.json";
-            const filePaths = glob.sync("./lighthouse-results/").filter(path => regex.test(path));
+            const filePaths = globs.sync("./lighthouse-results/**/*").filter(path => regex.test(path));
 
             for (const filePath of filePaths) {
               const fileContents = fs.readFileSync(filePath, "utf8");
