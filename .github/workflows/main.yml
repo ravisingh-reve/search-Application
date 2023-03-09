@@ -42,7 +42,7 @@ jobs:
             const filePath = path.join(artifactPath, matchingFiles[0]);
             const content = fs.readFileSync(filePath);
 
-            const fcp = content.['audits'].['first-contentful-paint'].['displayValue'];
+            const fcp = JSON.parse(content).['audits'].['first-contentful-paint'].['displayValue'];
             console.log(`fcp ${fcp}`);
 
             const htmlPath =
