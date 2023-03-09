@@ -30,18 +30,19 @@ jobs:
         run: |
           ls 
       - name: Set up environment
+        shell: bash
         run: |
-          global.glob = require('glob')
-
+          global.glob = require('glob');
+          
       - name: Send lighthouse report
         uses: actions/github-script@v6
         with:
           github-token: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
           script: >
-            const fs = require('fs')
+            const fs = require('fs');
 
             const regex = 'lhr-*.json';
-            const filePaths = glob.sync('./lighthouse-results/**/*').filter(path => regex.test(path))
+            const filePaths = glob.sync('./lighthouse-results/**/*').filter(path => regex.test(path));
 
             for (const filePath of filePaths) {
               const fileContents = fs.readFileSync(filePath, 'utf8');
