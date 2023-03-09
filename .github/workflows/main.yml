@@ -17,18 +17,15 @@ jobs:
         with:
           urls: |
             'https://www.tatacliq.com'
-          flags: '--report=json'
-
-      - name: Upload Lighthouse report
-        uses: actions/upload-artifact@v3
-        with:
-            name: lighthouse-report
-            path: './lighthouseci_report.json'
-
+          budgetPath: '.github/lighthouse/budget.json'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          runs: |
+              find / -type f -name "lhr-*.json" -exec cat {} \; -quit > report.json
       - name: Get lighthouse report 
         uses: actions/download-artifact@v3
         with:
-          name: lighthouse-report
+          name: lighthouse-results
       - shell: bash
         run: |
             ls
