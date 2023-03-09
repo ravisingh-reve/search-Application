@@ -13,11 +13,11 @@ jobs:
           node-version: 16.x
       - name: Audit URLs using Lighthouse
         id: LHCIAction
-        uses: treosh/lighthouse-ci-action@v9
+        uses: treosh/lighthouse-action@v2
         with:
           urls: |
             'https://www.tatacliq.com'
-          budgetPath: '.github/lighthouse/budget.json'
+          flags: '--only-categories=performance'
           uploadArtifacts: true
           temporaryPublicStorage: true
           reportFormat: json
