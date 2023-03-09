@@ -18,12 +18,7 @@ jobs:
 
       - name: Run Lighthouse audit
         run: npx lighthouse-ci https://www.tatacliq.com --output=json > lighthouse-report.json
-
-      - name: Get lighthouse report 
-        uses: actions/download-artifact@v3
         
-        with:
-          name: lighthouse-report
       - shell: bash
         run: |
             ls
