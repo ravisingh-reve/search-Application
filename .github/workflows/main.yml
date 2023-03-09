@@ -8,11 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js 16.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v1
         with:
           node-version: 16.x
-      - name: Install dependencies
-        run: npm install glob
       - name: Audit URLs using Lighthouse
         id: LHCIAction
         uses: treosh/lighthouse-ci-action@v9
@@ -30,10 +28,6 @@ jobs:
       - name: List artifact files
         run: |
           ls 
-      - name: Set up environment
-        shell: bash
-        run: |
-           export glob=$(node -p "require('glob')")
       - name: Send lighthouse report
         uses: actions/github-script@v6
         with:
@@ -41,13 +35,15 @@ jobs:
           script: >
             const fs = require('fs');
 
-            const regex = 'lhr-*.json';
-            const filePaths = glob.sync('./lighthouse-results/**/*').filter(path => regex.test(path));
+            const artifactDir = './lighthouse-results';
+            const filePattern = 'lhr-*.json';
+            const files = fs.readdirSync(artifactDir).filter(file => filePattern.test(file));
 
-            for (const filePath of filePaths) {
-              const fileContents = fs.readFileSync(filePath, 'utf8');
+            files.forEach(file => {
+              const filePath = `${artifactDir}/${file}`;
+              const fileContents = fs.readFileSync(filePath, "utf8");
               console.log(fileContents);
-            }
+            });
 
             const htmlPath =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
