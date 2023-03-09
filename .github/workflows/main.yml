@@ -5,219 +5,23 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.x
-      - name: Audit URLs using Lighthouse
-        id: LHCIAction
-        uses: treosh/lighthouse-ci-action@v9
-        with:
-          urls: |
-            'https://www.tatacliq.com'
-          budgetPath: '.github/lighthouse/budget.json'
-          uploadArtifacts: true
-          temporaryPublicStorage: true
-      - name: Get lighthouse report 
-        uses: actions/download-artifact@v3
-        with:
-          name: lighthouse-results
-      - shell: bash
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Lighthouse audit
+        run: npx lighthouse-ci https://www.tatacliq.com --output=json --output-path=lighthouse-report.json
+
+      - name: Parse Lighthouse report
+        id: parse-report
         run: |
-            find / -type f -name "lhr-*.json" -exec cat {} \; -quit
-      - name: Generate URLs
-        uses: actions/github-script@v6
-        with:
-          github-token: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
-          script: >
-            const { Octokit } = require("octokit");
-            const octokit = new Octokit({
-            auth: '${{secrets.LHCI_GITHUB_APP_TOKEN}}',
-            });
-            const file = Math.floor(new Date().getTime());
-            await octokit.request(
-            `GET /repos/ravisingh-reve/search-Application/actions/lighthouse-results/+'^lhr\-\d+\.json$'`,
-            {
-                owner: 'ravisingh-reve',
-                repo: 'search-Application',
-                headers: {
-                'X-GitHub-Api-Version': '2022-11-28',
-                },
-            }
-            );
-            console.log('octokit', octokit);
-
-            const htmlPath =
-            JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
-
-            const performance =
-            JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['performance']
-            * 100;
-
-            const accessibility =
-            JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['accessibility']
-            * 100;
-
-            const bestPractices =
-            JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['best-practices']
-            * 100;
-
-            const seo =
-            JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['seo']
-            * 100;
-
-            const pwa =
-            JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['pwa']
-            * 100;
-
-            const links =
-            JSON.parse('${{steps.LHCIAction.outputs.links}}')['https://www.tatacliq.com/'];
-
-            console.log('resultsPath','${{steps.LHCIAction.outputs.resultsPath}}');
-
-            console.log('links','${{steps.LHCIAction.outputs.links}}');
-
-            console.log('assertionResults','${{steps.LHCIAction.outputs.assertionResults}}');
-
-            console.log('manifest','${{steps.LHCIAction.outputs.manifest}}');
-
-            const bodyData = {
-                "type": "message",
-                "attachments": [
-                    {
-                        "contentType": "application/vnd.microsoft.card.adaptive",
-                        "content": {
-                            "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-                            "type": "AdaptiveCard",
-                            "version": "1.0",
-                            "body": [
-                                {
-                                    "type": "Container",
-                                    "items": [
-                                        {
-                                            "type": "TextBlock",
-                                            "text": "Published Lighthouse Home Page Report",
-                                            "weight": "bolder",
-                                            "size": "medium"
-                                        },
-                                        {
-                                            "type": "ColumnSet",
-                                            "columns": [
-                                                {
-                                                    "type": "Column",
-                                                    "width": "auto",
-                                                    "items": [
-                                                        {
-                                                            "type": "Image",
-                                                            "url": "https://static.theprint.in/wp-content/uploads/2021/09/tata-cliq-first-to-deliver-iphone-13-in-india.jpg?compress=true&quality=80&w=800&dpr=2.0",
-                                                            "size": "small",
-                                                            "style": "person"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "type": "Column",
-                                                    "width": "stretch",
-                                                    "items": [
-                                                        {
-                                                            "type": "TextBlock",
-                                                            "text": "Tata Cliq",
-                                                            "weight": "bolder",
-                                                            "wrap": true
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "type": "TextBlock",
-                                                    "spacing": "none",
-                                                    "text": `Created on ${new Date()}`,
-                                                    "isSubtle": true,
-                                                    "wrap": true
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "Container",
-                                    "items": [
-                                        {
-                                            "type": "TextBlock",
-                                            "text": `[Light-house Report](${links})`,
-                                            "wrap": true
-                                        },
-                                        {
-                                            "type": "FactSet",
-                                            "facts": [
-                                                {
-                                                    "title": "Performance:",
-                                                    "value": `${performance} %`
-                                                },
-                                                {
-                                                    "title": "Accessibility:",
-                                                    "value": `${accessibility} %`
-                                                },
-                                                {
-                                                    "title": "Best practices:",
-                                                    "value": `${bestPractices} %`
-                                                },
-                                                {
-                                                    "title": "SEO:",
-                                                    "value": `${seo} %`
-                                                },
-                                                {
-                                                    "title": "PWA:",
-                                                    "value": `${pwa} %`
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    }
-                ]
-            }
-            
-            function sendRequest(data) {
-              fetch('${{secrets.WEB_VITALS_HOOK}}', {
-                method: "POST",
-                headers: {'Content-Type': 'application/json'}, 
-                body: JSON.stringify(data)
-              }).then(res => {
-                console.log("Request complete! response:", res);
-              });
-            }
-            sendRequest(bodyData);
-             
-            
-          # const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
-          # core.setOutput('htmlPath', htmlPath);
-      # - name: Deploy Stage
-      #   uses: fjogeleit/http-request-action@v1
-      #   with:
-      #     url: '${{secrets.WEB_VITALS_HOOK}}'
-      #     method: POST
-      #     customHeaders: '{"Content-Type": "application/json"}'
-      #     data: |
-      #         {
-      #           "type":"message",
-      #           "attachments":[
-      #               {
-      #                 "contentType":"application/vnd.microsoft.card.adaptive",
-      #                 "contentUrl":null,
-      #                 "content":{
-      #                     "$schema":"http://adaptivecards.io/schemas/adaptive-card.json",
-      #                     "type":"AdaptiveCard",
-      #                     "version":"1.2",
-      #                     "body":[
-      #                         {
-      #                         "type": "TextBlock",
-      #                         "text": 'Lighthouse Report ${{steps.htmlPath.outputs.htmlPath}}'
-      #                         }
-      #                     ]
-      #                 }
-      #               }
-      #           ]
-      #         }
+          const report = require('./lighthouse-report.json');
+          const metrics = report.categories.performance;
+          const score = metrics.score;
+          const interactive = metrics.metrics.interactive.value;
+          const speedIndex = metrics.metrics.speedIndex.value;
+          console.log(`Score: ${score}`);
+          console.log(`Interactive: ${interactive}`);
+          console.log(`Speed Index: ${speedIndex}`);
