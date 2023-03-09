@@ -36,18 +36,21 @@ jobs:
             
             const { Octokit } = require("octokit");
             const octokit = new Octokit({
-            auth: '${{secrets.LHCI_GITHUB_APP_TOKEN}}'
+            auth: '${{secrets.LHCI_GITHUB_APP_TOKEN}}',
             });
             const file = Math.floor(new Date().getTime());
-            await octokit.request(`GET /repos/ravisingh-reve/search-Application/actions/lighthouse-results/lhr-file.json`, {
-            owner: 'ravisingh-reve',
-            repo: 'search-Application',
-            headers: {
-                'X-GitHub-Api-Version': '2022-11-28'
+            await octokit.request(
+            `GET /repos/ravisingh-reve/search-Application/actions/lighthouse-results/+'^lhr\-\d+\.json$'`,
+            {
+                owner: 'ravisingh-reve',
+                repo: 'search-Application',
+                headers: {
+                'X-GitHub-Api-Version': '2022-11-28',
+                },
             }
-            })
-            console.log('octokit',octokit);
-            
+            );
+            console.log('octokit', octokit);
+
             const htmlPath =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
 
