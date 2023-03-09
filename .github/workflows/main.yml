@@ -38,7 +38,7 @@ jobs:
             const glob = require("glob");
 
             const regex = "lhr-*.json";
-            const filePaths = glob.sync("./lighthouse-results/**/*").filter(path => regex.test(path));
+            const filePaths = glob.sync("./lighthouse-results/").filter(path => regex.test(path));
 
             for (const filePath of filePaths) {
               const fileContents = fs.readFileSync(filePath, "utf8");
