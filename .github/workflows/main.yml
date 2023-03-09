@@ -34,12 +34,17 @@ jobs:
           github-token: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
           script: >
             const fs = require('fs');
-
-            const filePattern = 'lhr-*.json';
-            const files = glob.sync('lighthouse-results/*');
-            const matchedFile = files.find(file => file.match(filePattern));
-            const content = fs.readFileSync(matchedFile);
-            console.log(content.toString());
+            const path = require('path');
+            const artifactPath = 'lighthouse-results';
+            const regex = /lhr-.*\.json/;
+            const files = fs.readdirSync(artifactPath);
+            const matchingFiles = files.filter((file) => regex.test(file));
+            for (const file of matchingFiles) {
+                const filePath = path.join(artifactPath, file);
+                const content = fs.readFileSync(filePath);
+                console.log(`Content of ${filePath}:`);
+                console.log(content.toString());
+            }
 
             const htmlPath =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
