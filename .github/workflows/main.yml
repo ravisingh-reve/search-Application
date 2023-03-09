@@ -18,9 +18,8 @@ jobs:
           urls: |
             'https://www.tatacliq.com'
           temporaryPublicStorage: true
+          uploadArtifacts: true
           artifactName: lighthouse-results
-          runs: |
-              find / -type f -name "lhr-*.json" -exec cat {} \; -quit > report.json
 
       - name: Get lighthouse report 
         uses: actions/download-artifact@v3
