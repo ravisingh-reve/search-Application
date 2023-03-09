@@ -13,19 +13,22 @@ jobs:
           node-version: 16.x
       - name: Audit URLs using Lighthouse
         id: LHCIAction
-        uses: treosh/lighthouse-action@v2
+        uses: treosh/lighthouse-ci-action@v9
         with:
           urls: |
             'https://www.tatacliq.com'
-          flags: '--only-categories=performance'
-          uploadArtifacts: true
-          temporaryPublicStorage: true
-          reportFormat: json
-          outputPath: lighthouse-report.json
+          flags: '--report=json'
+
+      - name: Upload Lighthouse report
+        uses: actions/upload-artifact@v3
+        with:
+            name: lighthouse-report
+            path: './lighthouseci_report.json'
+
       - name: Get lighthouse report 
         uses: actions/download-artifact@v3
         with:
-          name: lighthouse-results
+          name: lighthouse-report
       - shell: bash
         run: |
             ls
