@@ -19,15 +19,18 @@ jobs:
       - name: Run Lighthouse audit
         run: npx lighthouse-ci https://www.tatacliq.com --output=json --output-path=lighthouse-report.json
 
-      - name: Parse Lighthouse report
-        run: |
-          const fs = require("fs");
-          const report = JSON.parse(fs.readFileSync('./lighthouse-report.json', 'utf8'));
-          console.log(report);
-          const metrics = report.categories.performance;
-          const score = metrics.score;
-          const interactive = metrics.metrics.interactive.value;
-          const speedIndex = metrics.metrics.speedIndex.value;
-          console.log(`Score: ${score}`);
-          console.log(`Interactive: ${interactive}`);
-          console.log(`Speed Index: ${speedIndex}`);
+      - name: Generate URLs
+        uses: actions/github-script@v6
+        with:
+          github-token: '${{ secrets.LHCI_GITHUB_APP_TOKEN }}'
+          script: >
+            const fs = require('fs');
+            const report = JSON.parse(fs.readFileSync('./lighthouse-report.json', 'utf8'));
+            console.log(report);
+            const metrics = report.categories.performance;
+            const score = metrics.score;
+            const interactive = metrics.metrics.interactive.value;
+            const speedIndex = metrics.metrics.speedIndex.value;
+            console.log(`Score: ${score}`);
+            console.log(`Interactive: ${interactive}`);
+            console.log(`Speed Index: ${speedIndex}`);
