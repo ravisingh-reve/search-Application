@@ -38,13 +38,12 @@ jobs:
             const artifactPath = 'lighthouse-results';
             const regex = /lhr-.*\.json/;
             const files = fs.readdirSync(artifactPath);
-            const matchingFiles = files.filter((file) => regex.test(file));
-            for (const file of matchingFiles) {
-                const filePath = path.join(artifactPath, file);
-                const content = fs.readFileSync(filePath);
-                console.log(`Content of ${filePath}:`);
-                console.log(content.toString());
-            }
+            const matchingFiles = files.filter((file) => regex.test(file));        
+            const filePath = path.join(artifactPath, matchingFiles[0]);
+            const content = fs.readFileSync(filePath);
+            console.log(`Content of ${filePath}:`);
+            console.log(content.toString());
+
 
             const htmlPath =
             JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
