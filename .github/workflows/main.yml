@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: 16.x
       - name: Audit URLs using Lighthouse
-        id: LHCIAction
+        id: lighthouse
         uses: treosh/lighthouse-ci-action@v9
         with:
           urls: |
@@ -51,19 +51,19 @@ jobs:
             const tbt = data.audits['total-blocking-time'].displayValue;
             const si = data.audits['speed-index'].displayValue;
 
-            const LHCILinks = JSON.parse('${{steps.LHCIAction.outputs.links}}');
-            const LHCIManifest = JSON.parse('${{steps.LHCIAction.outputs.manifest}}');
-            const performance = LHCIManifest[0].summary['performance']* 100;
-            const accessibility = LHCIManifest[0].summary['accessibility']* 100;
-            const bestPractices = LHCIManifest[0].summary['best-practices']* 100;
-            const seo = LHCIManifest[0].summary['seo']* 100;
-            const pwa = LHCIManifest[0].summary['pwa']* 100;
-            const links = LHCILinks['https://www.tatacliq.com/'];
+            const lightHouseLinks = JSON.parse('${{steps.lighthouse.outputs.links}}');
+            const lightHouseManifest = JSON.parse('${{steps.lighthouse.outputs.manifest}}');
+            const performance = lightHouseManifest[0].summary['performance']* 100;
+            const accessibility = lightHouseManifest[0].summary['accessibility']* 100;
+            const bestPractices = lightHouseManifest[0].summary['best-practices']* 100;
+            const seo = lightHouseManifest[0].summary['seo']* 100;
+            const pwa = lightHouseManifest[0].summary['pwa']* 100;
+            const links = lightHouseLinks['https://www.tatacliq.com/'];
 
-            console.log('resultsPath','${{steps.LHCIAction.outputs.resultsPath}}');
-            console.log('links','${{steps.LHCIAction.outputs.links}}');
-            console.log('assertionResults','${{steps.LHCIAction.outputs.assertionResults}}');
-            console.log('manifest','${{steps.LHCIAction.outputs.manifest}}');
+            console.log('resultsPath','${{steps.lighthouse.outputs.resultsPath}}');
+            console.log('links','${{steps.lighthouse.outputs.links}}');
+            console.log('assertionResults','${{steps.lighthouse.outputs.assertionResults}}');
+            console.log('manifest','${{steps.lighthouse.outputs.manifest}}');
             const bodyData = {
                 "type": "message",
                 "attachments": [
