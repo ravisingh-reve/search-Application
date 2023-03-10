@@ -50,7 +50,7 @@ jobs:
             const tbt = data.audits['total-blocking-time'].displayValue;
             const si = data.audits['speed-index'].displayValue;
 
-            const LHCIData = JSON.parse('${{steps.LHCIAction.outputs}}')
+            const LHCIData = JSON.parse('${{steps.LHCIAction.outputs}}');
             const htmlPath = LHCIData.manifest[0].htmlPath;
             const performance = LHCIData.manifest[0].summary['performance']* 100;
             const accessibility = LHCIData.manifest[0].summary['accessibility']* 100;
