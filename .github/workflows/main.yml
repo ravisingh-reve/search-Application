@@ -20,13 +20,6 @@ jobs:
           temporaryPublicStorage: true
           uploadArtifacts: true
           artifactName: lighthouse-results
-        env:
-          LIGHTHOUSE_COLLECT: 'true'
-      - name: Print Lighthouse result path
-        run: |
-            echo ${{ steps.lighthouse.outputs.resultPath }}
-            cd ${{ steps.lighthouse.outputs.resultPath }}
-            ls
       - name: Download artifacts
         uses: actions/download-artifact@v3
         with:
