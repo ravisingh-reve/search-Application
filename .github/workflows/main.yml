@@ -35,6 +35,7 @@ jobs:
           script: >
             const fs = require('fs');
             const path = require('path');
+
             const artifactPath = 'lighthouse-results';
             const regex = /lhr-.*\.json/;
             const files = fs.readdirSync(artifactPath);
@@ -49,25 +50,15 @@ jobs:
             const tbt = data.audits['total-blocking-time'].displayValue;
             const si = data.audits['speed-index'].displayValue;
 
-            const htmlPath =
-            JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath;
-            const performance =
-            JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['performance']
-            * 100;
-            const accessibility =
-            JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['accessibility']
-            * 100;
-            const bestPractices =
-            JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['best-practices']
-            * 100;
-            const seo =
-            JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['seo']
-            * 100;
-            const pwa =
-            JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].summary['pwa']
-            * 100;
-            const links =
-            JSON.parse('${{steps.LHCIAction.outputs.links}}')['https://www.tatacliq.com/'];
+            const LHCIData = JSON.parse('${{steps.LHCIAction.outputs}}')
+            const htmlPath = LHCIData.manifest[0].htmlPath;
+            const performance = LHCIData.manifest[0].summary['performance']* 100;
+            const accessibility = LHCIData.manifest[0].summary['accessibility']* 100;
+            const bestPractices = LHCIData.manifest[0].summary['best-practices']* 100;
+            const seo = LHCIData.manifest[0].summary['seo']* 100;
+            const pwa = LHCIData.manifest[0].summary['pwa']* 100;
+            const links = LHCIData.links['https://www.tatacliq.com/'];
+
             console.log('resultsPath','${{steps.LHCIAction.outputs.resultsPath}}');
             console.log('links','${{steps.LHCIAction.outputs.links}}');
             console.log('assertionResults','${{steps.LHCIAction.outputs.assertionResults}}');
