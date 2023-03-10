@@ -24,10 +24,9 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: lighthouse-results
-          path: lighthouse-results
-      - name: List artifact files
-        run: |
-          ls 
+          path: ${{ steps.lighthouse.outputs.resultPath }}
+      - name: Use Lighthouse report
+        run: cat lighthouse_report.json
       - name: Send lighthouse report
         uses: actions/github-script@v6
         with:
@@ -36,7 +35,7 @@ jobs:
             const fs = require('fs');
             const path = require('path');
 
-            const artifactPath = 'lighthouse-results';
+            const artifactPath = ${{ steps.lighthouse.outputs.resultPath }};
             const regex = /lhr-.*\.json/;
             const files = fs.readdirSync(artifactPath);
             const matchingFiles = files.filter((file) => regex.test(file));        
