@@ -50,9 +50,10 @@ jobs:
             const tbt = data.audits['total-blocking-time'].displayValue;
             const si = data.audits['speed-index'].displayValue;
 
-            const LHCIManifest = JSON.parse('${{steps.LHCIAction.outputs.manifest}}');
+            const LHCIAssertionResults = JSON.parse('${{steps.LHCIAction.outputs.assertionResults}}');
             const LHCILinks = JSON.parse('${{steps.LHCIAction.outputs.links}}');
-            const htmlPath = LHCIManifest[0].htmlPath;
+            const LHCIManifest = JSON.parse('${{steps.LHCIAction.outputs.manifest}}');
+            const LHCIResultsPath = JSON.parse('${{steps.LHCIAction.outputs.resultsPath}}');
             const performance = LHCIManifest[0].summary['performance']* 100;
             const accessibility = LHCIManifest[0].summary['accessibility']* 100;
             const bestPractices = LHCIManifest[0].summary['best-practices']* 100;
