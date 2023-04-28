@@ -193,8 +193,8 @@ jobs:
             sendRequest(bodyData);
              
             
-          # const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
-          # core.setOutput('htmlPath', htmlPath);
+      # const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
+      # core.setOutput('htmlPath', htmlPath);
       # - name: Deploy Stage
       #   uses: fjogeleit/http-request-action@v1
       #   with:
