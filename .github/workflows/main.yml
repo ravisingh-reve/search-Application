@@ -16,7 +16,7 @@ jobs:
         uses: treosh/lighthouse-ci-action@v9
         with:
           urls: |
-            'https://www.tatacliq.com/search/?searchCategory=all&text=kurtas%20for%20women'
+            'https://www.tatacliq.com/scakhi-teal-embroidered-kurta-with-pants-dupatta/p-mp000000014905299'
           temporaryPublicStorage: true
           uploadArtifacts: true
           artifactName: lighthouse-results
