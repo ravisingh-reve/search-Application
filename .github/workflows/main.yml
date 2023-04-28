@@ -78,7 +78,7 @@ jobs:
                                     "items": [
                                         {
                                             "type": "TextBlock",
-                                            "text": "Published Lighthouse PLP Report",
+                                            "text": "Published Lighthouse PDP Report",
                                             "weight": "bolder",
                                             "size": "medium"
                                         },
