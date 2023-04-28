@@ -16,7 +16,7 @@ jobs:
         uses: treosh/lighthouse-ci-action@v9
         with:
           urls: |
-            'https://www.tatacliq.com'
+            'https://www.tatacliq.com/search/?searchCategory=all&text=kurtas%20for%20women'
           temporaryPublicStorage: true
           uploadArtifacts: true
           artifactName: lighthouse-results
@@ -78,7 +78,7 @@ jobs:
                                     "items": [
                                         {
                                             "type": "TextBlock",
-                                            "text": "Published Lighthouse Home Page Report",
+                                            "text": "Published Lighthouse PLP Report",
                                             "weight": "bolder",
                                             "size": "medium"
                                         },
