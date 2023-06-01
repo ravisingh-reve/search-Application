@@ -16,7 +16,7 @@ jobs:
         uses: treosh/lighthouse-ci-action@v9
         with:
           urls: |
-            'https://www.tatacliq.com/scakhi-teal-embroidered-kurta-with-pants-dupatta/p-mp000000014905299'
+            'https://www.tatacliq.com'
           temporaryPublicStorage: true
           uploadArtifacts: true
           artifactName: lighthouse-results
@@ -78,7 +78,7 @@ jobs:
                                     "items": [
                                         {
                                             "type": "TextBlock",
-                                            "text": "Published Lighthouse PDP Report",
+                                            "text": "Published Lighthouse HOME PAGE ",
                                             "weight": "bolder",
                                             "size": "medium"
                                         },
