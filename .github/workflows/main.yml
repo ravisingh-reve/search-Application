@@ -16,7 +16,7 @@ jobs:
         uses: treosh/lighthouse-ci-action@v9
         with:
           urls: |
-            'https://www.tatacliq.com/'
+            'https://www.tatacliq.com/womens-clothing-ethnic-wear-kurtis-kurtas/c-msh1012100?&icid2=auto:dm3:main:hmp:m1012100:mulc:nod:01:R0'
           temporaryPublicStorage: true
           uploadArtifacts: true
           artifactName: lighthouse-results
@@ -78,7 +78,7 @@ jobs:
                                     "items": [
                                         {
                                             "type": "TextBlock",
-                                            "text": "Published Lighthouse Home page ",
+                                            "text": "Published Lighthouse PLP page ",
                                             "weight": "bolder",
                                             "size": "medium"
                                         },
