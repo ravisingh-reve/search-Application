@@ -16,7 +16,7 @@ jobs:
         uses: treosh/lighthouse-ci-action@v9
         with:
           urls: |
-            'https://www.tatacliq.com/utsa-by-westside-printed-black-embroidered-off-white-kurta/p-mp000000017539789'
+            'https://www.tatacliq.com/'
           temporaryPublicStorage: true
           uploadArtifacts: true
           artifactName: lighthouse-results
@@ -78,7 +78,7 @@ jobs:
                                     "items": [
                                         {
                                             "type": "TextBlock",
-                                            "text": "Published Lighthouse PDP page ",
+                                            "text": "Published Lighthouse Home page ",
                                             "weight": "bolder",
                                             "size": "medium"
                                         },
