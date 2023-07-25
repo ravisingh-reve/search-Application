@@ -16,7 +16,7 @@ jobs:
         uses: treosh/lighthouse-ci-action@v10
         with:
           urls: |
-            'https://www.tatacliq.com/'
+            [https://www.tatacliq.com/,https://www.tatacliq.com/, ]
           temporaryPublicStorage: true
           uploadArtifacts: true
           artifactName: lighthouse-results
