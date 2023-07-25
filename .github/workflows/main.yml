@@ -16,7 +16,7 @@ jobs:
         uses: treosh/lighthouse-ci-action@v9
         with:
           urls: |
-            'https://www.tatacliq.com/cottinfab-off-white-grey-cotton-striped-shirt-dress/p-mp000000014626240'
+            'https://www.tatacliq.com/'
           temporaryPublicStorage: true
           uploadArtifacts: true
           artifactName: lighthouse-results
@@ -78,7 +78,7 @@ jobs:
                                     "items": [
                                         {
                                             "type": "TextBlock",
-                                            "text": "Published Lighthouse PDP page ",
+                                            "text": "Published Lighthouse home page ",
                                             "weight": "bolder",
                                             "size": "medium"
                                         },
