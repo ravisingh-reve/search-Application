@@ -49,6 +49,7 @@ jobs:
             const fmp = data.audits['first-meaningful-paint'].displayValue;
             const tbt = data.audits['total-blocking-time'].displayValue;
             const si = data.audits['speed-index'].displayValue;
+            const cls = data.audits['cumulative-layout-shift'].displayValue;
 
             const lightHouseLinks = JSON.parse('${{steps.lighthouse.outputs.links}}');
             const lightHouseManifest = JSON.parse('${{steps.lighthouse.outputs.manifest}}');
@@ -170,7 +171,11 @@ jobs:
                                                 {
                                                     "title": "Speed Index:",
                                                     "value": `${si}`
-                                                }
+                                                },
+                                                {
+                                                  "title": "CLS:",
+                                                    "value": `${cls}`
+                                                } 
                                             ]
                                         }
                                     ]
