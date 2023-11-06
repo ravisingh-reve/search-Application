@@ -43,7 +43,7 @@ jobs:
             console.log('resultsPath','${{steps.lighthouse.outputs.resultsPath}}'); console.log('links','${{steps.lighthouse.outputs.links}}'); console.log('assertionResults','${{steps.lighthouse.outputs.assertionResults}}'); console.log('manifest','${{steps.lighthouse.outputs.manifest}}'); 
             const bodyData = {   "msite": {
                 "url": "www.tatacliq.com",
-                "currentDateTime": JSON.stringify(currentDate),
+                "currentDateTime":currentDate,
                 "pageName": "Home page",
                 "webVitalData": {
                     "Performance": `${performance}`,
