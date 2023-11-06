@@ -64,130 +64,29 @@ jobs:
             console.log('links','${{steps.lighthouse.outputs.links}}');
             console.log('assertionResults','${{steps.lighthouse.outputs.assertionResults}}');
             console.log('manifest','${{steps.lighthouse.outputs.manifest}}');
-            const bodyData = {
-                "type": "message",
-                "attachments": [
-                    {
-                        "contentType": "application/vnd.microsoft.card.adaptive",
-                        "content": {
-                            "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-                            "type": "AdaptiveCard",
-                            "version": "1.0",
-                            "body": [
-                                {
-                                    "type": "Container",
-                                    "items": [
-                                        {
-                                            "type": "TextBlock",
-                                            "text": "Published Lighthouse home page ",
-                                            "weight": "bolder",
-                                            "size": "medium"
-                                        },
-                                        {
-                                            "type": "ColumnSet",
-                                            "columns": [
-                                                {
-                                                    "type": "Column",
-                                                    "width": "auto",
-                                                    "items": [
-                                                        {
-                                                            "type": "Image",
-                                                            "url": "https://static.theprint.in/wp-content/uploads/2021/09/tata-cliq-first-to-deliver-iphone-13-in-india.jpg?compress=true&quality=80&w=800&dpr=2.0",
-                                                            "size": "small",
-                                                            "style": "person"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "type": "Column",
-                                                    "width": "stretch",
-                                                    "items": [
-                                                        {
-                                                            "type": "TextBlock",
-                                                            "text": "Tata Cliq",
-                                                            "weight": "bolder",
-                                                            "wrap": true
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "type": "TextBlock",
-                                                    "spacing": "none",
-                                                    "text": `Created on ${new Date()}`,
-                                                    "isSubtle": true,
-                                                    "wrap": true
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "Container",
-                                    "items": [
-                                        {
-                                            "type": "TextBlock",
-                                            "text": `[Light-house Report](${links})`,
-                                            "wrap": true
-                                        },
-                                        {
-                                            "type": "FactSet",
-                                            "facts": [
-                                                {
-                                                    "title": "Performance:",
-                                                    "value": `${performance} %`
-                                                },
-                                                {
-                                                    "title": "Accessibility:",
-                                                    "value": `${accessibility} %`
-                                                },
-                                                {
-                                                    "title": "Best practices:",
-                                                    "value": `${bestPractices} %`
-                                                },
-                                                {
-                                                    "title": "SEO:",
-                                                    "value": `${seo} %`
-                                                },
-                                                {
-                                                    "title": "PWA:",
-                                                    "value": `${pwa} %`
-                                                },
-                                                {
-                                                    "title": "First Contentful Paint:",
-                                                    "value": `${fcp}`
-                                                },
-                                                {
-                                                    "title": "Largest Contentful Paint:",
-                                                    "value": `${lcp}`
-                                                },
-                                                {
-                                                    "title": "First Meaningful Paint:",
-                                                    "value": `${fmp}`
-                                                },
-                                                {
-                                                    "title": "Total Blocking Time:",
-                                                    "value": `${tbt}`
-                                                },
-                                                {
-                                                    "title": "Speed Index:",
-                                                    "value": `${si}`
-                                                },
-                                                {
-                                                  "title": "CLS:",
-                                                    "value": `${cls}`
-                                                } 
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    }
-                ]
+            const bodyData = {  
+            "msite": {
+                "url": "www.tatacliq.com",
+                "time": new Date(),
+                "pageName": "Home page",
+                "webVitalData": {
+                    "Performance": `${performance}`,
+                    "Accessibility":`${accessibility}`,
+                    "bestPractices": `${bestPractices}`,
+                    "seo": `${seo}`,
+                    "pwa": `${pwa}`,
+                    "fcp": `${fcp}`,
+                    "lcp": `${lcp}`,
+                    "fmp": `${fmp}`,
+                    "tbt": `${tbt}`,
+                    "si": `${si}`,
+                    "cls": `${cls}`,    
+                }
+              }           
             }
             
             function sendRequest(data) {
-              fetch('${{secrets.WEB_VITALS_HOOK}}', {
+              fetch("http://3.109.48.133:8000/api/msite"), {
                 method: "POST",
                 headers: {'Content-Type': 'application/json'}, 
                 body: JSON.stringify(data)
