@@ -36,7 +36,7 @@ jobs:
 
             const artifactPath = 'lighthouse-results'; const regex = /lhr-.*\.json/; const files = fs.readdirSync(artifactPath); const matchingFiles = files.filter((file) => regex.test(file));         const filePath = path.join(artifactPath, matchingFiles[0]); const jsonString = fs.readFileSync(filePath,'utf8'); const data = JSON.parse(jsonString);
 
-            const fcp = data.audits['first-contentful-paint'].displayValue; const lcp = data.audits['largest-contentful-paint'].displayValue; const fmp = data.audits['first-meaningful-paint'].displayValue; const tbt = data.audits['total-blocking-time'].displayValue; const si = data.audits['speed-index'].displayValue; const cls = data.audits['cumulative-layout-shift'].displayValue;
+            const fcp = data.audits['first-contentful-paint'].numericValue; const lcp = data.audits['largest-contentful-paint'].numericValue; const fmp = data.audits['first-meaningful-paint'].numericValue; const tbt = data.audits['total-blocking-time'].numericValue; const si = data.audits['speed-index'].numericValue; const cls = data.audits['cumulative-layout-shift'].displayValue;
 
             const lightHouseLinks = JSON.parse('${{steps.lighthouse.outputs.links}}'); const lightHouseManifest = JSON.parse('${{steps.lighthouse.outputs.manifest}}'); const performance = lightHouseManifest[0].summary['performance']* 100; const accessibility = lightHouseManifest[0].summary['accessibility']* 100; const bestPractices = lightHouseManifest[0].summary['best-practices']* 100; const seo = lightHouseManifest[0].summary['seo']* 100; const pwa = lightHouseManifest[0].summary['pwa']* 100; const links = lightHouseLinks['https://www.tatacliq.com/'];
             const currentDate = new Date();
