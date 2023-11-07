@@ -44,7 +44,7 @@ jobs:
             const bodyData = {   "msite": {
                 "url": "www.tatacliq.com",
                 "currentDateTime":currentDate,
-                "pageName": "Home page",
+                "pageName": "Home",
                 "webVitalData": {
                     "Performance": `${performance}`,
                     "Accessibility":`${accessibility}`,
