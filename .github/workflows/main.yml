@@ -15,7 +15,7 @@ jobs:
         uses: treosh/lighthouse-ci-action@v10
         with:
           urls: |
-            'https://www.tatacliq.com/'
+            'https://www.tatacliq.com/utsa-by-westside-maroon-mandala-mirror-embroidered-a-line-kurta/p-mp000000019791036'
           temporaryPublicStorage: true
           uploadArtifacts: true
           artifactName: lighthouse-results
@@ -44,7 +44,7 @@ jobs:
             const bodyData = {   "msite": {
                 "url": "www.tatacliq.com",
                 "currentDateTime":currentDate,
-                "pageName": "Home",
+                "pageName": "Pdp",
                 "webVitalData": {
                     "Performance": `${performance}`,
                     "Accessibility":`${accessibility}`,
