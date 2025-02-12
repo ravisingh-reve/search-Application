@@ -18,11 +18,11 @@ jobs:
             'https://www.tatacliq.com'
           temporaryPublicStorage: true
           uploadArtifacts: true
-          artifactName: lighthouse-results
+          artifactName: lighthouse-artifact  # Changed artifact name
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
-          name: lighthouse-results
+          name: lighthouse-artifact  # Changed artifact name
           path: lighthouse-results
       - name: List artifact files
         run: |
