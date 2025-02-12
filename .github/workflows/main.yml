@@ -19,11 +19,11 @@ jobs:
           temporaryPublicStorage: true
           uploadArtifacts: true
           artifactName: lighthouse-results
-      # - name: Download artifacts
-      #   uses: actions/upload-artifact@master
-      #   with:
-      #     name: report
-      #     path: './report'
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: lighthouse-results
+          path: lighthouse-results
       - name: List artifact files
         run: |
           ls 
@@ -59,36 +59,46 @@ jobs:
                     "cls": `${cls}`,    
                 }
               }           
-            } 
-            
-      #       const manifest = JSON.parse(${{ steps.LHCIAction.outputs.manifest }} || '[]');
-      #       const htmlPath = manifest.length > 0 ? JSON.stringify(manifest[0].htmlPath) : '""';
-      #       core.setOutput('htmlPath', htmlPath);
-      # - name: Deploy Stage
-      #   uses: fjogeleit/http-request-action@v1
-      #   with:
-      #     url: '${{secrets.WEB_VITALS_HOOK}}'
-      #     method: POST
-      #     customHeaders: '{"Content-Type": "application/json"}'
-      #     data: |
-      #         {
-      #           "type":"message",
-      #           "attachments":[
-      #               {
-      #                 "contentType":"application/vnd.microsoft.card.adaptive",
-      #                 "contentUrl":null,
-      #                 "content":{
-      #                     "$schema":"http://adaptivecards.io/schemas/adaptive-card.json",
-      #                     "type":"AdaptiveCard",
-      #                     "version":"1.2",
-      #                     "body":[
-      #                         {
-      #                         "type": "TextBlock",
-      #                         "text": 'Lighthouse Report ${{steps.htmlPath.outputs.htmlPath}}'
-      #                         }
-      #                     ]
-      #                 }
-      #               }
-      #           ]
-      #         } 
+            }
 
+            # function sendRequest(data) {
+            #   fetch("http://3.109.48.133:8000/api/msite", {
+            #     method: "POST",
+            #     headers: {'Content-Type': 'application/json'}, 
+            #     body: JSON.stringify(data)
+            #   }).then(res => {
+            #     console.log("Request complete! response:", res);
+            #   });
+            # } sendRequest(bodyData);
+
+             
+            
+            const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
+            core.setOutput('htmlPath', htmlPath);
+      - name: Deploy Stage
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: '${{secrets.WEB_VITALS_HOOK}}'
+          method: POST
+          customHeaders: '{"Content-Type": "application/json"}'
+          data: |
+              {
+                "type":"message",
+                "attachments":[
+                    {
+                      "contentType":"application/vnd.microsoft.card.adaptive",
+                      "contentUrl":null,
+                      "content":{
+                          "$schema":"http://adaptivecards.io/schemas/adaptive-card.json",
+                          "type":"AdaptiveCard",
+                          "version":"1.2",
+                          "body":[
+                              {
+                              "type": "TextBlock",
+                              "text": 'Lighthouse Report ${{steps.htmlPath.outputs.htmlPath}}'
+                              }
+                          ]
+                      }
+                    }
+                ]
+              } 
