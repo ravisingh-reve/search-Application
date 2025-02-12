@@ -22,8 +22,8 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: lighthouse-results
-          path: lighthouse-results
+          name: lighthouse_results
+          path: ./lighthouse
       - name: List artifact files
         run: |
           ls 
