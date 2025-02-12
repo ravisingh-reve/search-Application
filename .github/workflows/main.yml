@@ -19,11 +19,11 @@ jobs:
           temporaryPublicStorage: true
           uploadArtifacts: true
           artifactName: lighthouse-results
-      - name: Download artifacts
-        uses: actions/upload-artifact@master
-        with:
-          name: report
-          path: './report'
+      # - name: Download artifacts
+      #   uses: actions/upload-artifact@master
+      #   with:
+      #     name: report
+      #     path: './report'
       - name: List artifact files
         run: |
           ls 
