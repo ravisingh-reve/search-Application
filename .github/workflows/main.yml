@@ -87,7 +87,7 @@ jobs:
             const accessibility = lightHouseManifest[0].summary['accessibility'] * 100;
             const bestPractices = lightHouseManifest[0].summary['best-practices'] * 100;
             const seo = lightHouseManifest[0].summary['seo'] * 100;
-            const pwa = lightHouseManifest[0].summary['pwa'] * 100;
+            const pwa = lightHouseManifest[0].summary['pwa'] * 100; 
 
             // Prepare the data to send
             const currentDate = new Date();
