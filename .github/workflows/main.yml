@@ -22,27 +22,33 @@ jobs:
           urls: |
             'https://www.tatacliq.com'
           temporaryPublicStorage: true
-          uploadArtifacts: true
-          artifactName: lighthouse-results  # Use a valid artifact name
+          uploadArtifacts: false  # Disable artifact upload in lighthouse-ci-action
 
       # Step 4: Debugging - List files after Lighthouse audit
       - name: List files after Lighthouse audit
         run: |
           ls
 
-      # Step 5: Download the Lighthouse artifact
+      # Step 5: Manually upload Lighthouse results
+      - name: Upload Lighthouse Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-results
+          path: .lighthouseci  # Default path where Lighthouse CI stores results
+
+      # Step 6: Download the Lighthouse artifact
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: lighthouse-results  # Match the artifact name used in the upload step
-          path: lighthouse-results  # Directory to download the artifact into
+          name: lighthouse-results
+          path: lighthouse-results
 
-      # Step 6: Debugging - List downloaded artifact files
+      # Step 7: Debugging - List downloaded artifact files
       - name: List downloaded artifact files
         run: |
           ls lighthouse-results
 
-      # Step 7: Process Lighthouse results and send report
+      # Step 8: Process Lighthouse results and send report
       - name: Send lighthouse report
         uses: actions/github-script@v6
         with:
@@ -117,7 +123,7 @@ jobs:
             //   console.log("Request complete! response:", res);
             // });
 
-      # Step 8: Deploy Stage - Send report via HTTP request
+      # Step 9: Deploy Stage - Send report via HTTP request
       - name: Deploy Stage
         uses: fjogeleit/http-request-action@v1
         with:
