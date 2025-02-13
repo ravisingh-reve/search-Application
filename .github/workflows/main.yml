@@ -27,7 +27,7 @@ jobs:
       # Step 4: Debugging - List files after Lighthouse audit
       - name: List files after Lighthouse audit
         run: |
-          ls
+          ls .lighthouseci
 
       # Step 5: Manually upload Lighthouse results
       - name: Upload Lighthouse Results
