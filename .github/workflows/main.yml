@@ -45,9 +45,9 @@ jobs:
           # Remove repository and run-id if downloading in the same workflow run
 
       # Step 7: Debugging - List downloaded artifact files
-      # - name: List downloaded artifact files
-      #   run: |
-      #     ls lighthouse-results
+      - name: List downloaded artifact files
+        run: |
+          ls .lighthouseci
 
       # Step 8: Process Lighthouse results and send report
       - name: Send lighthouse report
