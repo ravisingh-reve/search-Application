@@ -5,11 +5,16 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Checkout the repository
       - uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js 16.x
       - name: Use Node.js 16.x
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
+
+      # Step 3: Run Lighthouse audit
       - name: Audit URLs using Lighthouse
         id: lighthouse
         uses: treosh/lighthouse-ci-action@v10
@@ -18,63 +23,101 @@ jobs:
             'https://www.tatacliq.com'
           temporaryPublicStorage: true
           uploadArtifacts: true
-          artifactName: lighthouse-artifact  # Changed artifact name
+          artifactName: lighthouse-results  # Use a valid artifact name
+
+      # Step 4: Debugging - List files after Lighthouse audit
+      - name: List files after Lighthouse audit
+        run: |
+          ls
+
+      # Step 5: Download the Lighthouse artifact
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: lighthouse-artifact  # Changed artifact name
-          path: lighthouse-results
-      - name: List artifact files
+          name: lighthouse-results  # Match the artifact name used in the upload step
+          path: lighthouse-results  # Directory to download the artifact into
+
+      # Step 6: Debugging - List downloaded artifact files
+      - name: List downloaded artifact files
         run: |
-          ls 
+          ls lighthouse-results
+
+      # Step 7: Process Lighthouse results and send report
       - name: Send lighthouse report
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-          script: >
-            const fs = require('fs'); const path = require('path');
+          script: |
+            const fs = require('fs');
+            const path = require('path');
 
-            const artifactPath = 'lighthouse-results'; const regex = /lhr-.*\.json/; const files = fs.readdirSync(artifactPath); const matchingFiles = files.filter((file) => regex.test(file));         const filePath = path.join(artifactPath, matchingFiles[0]); const jsonString = fs.readFileSync(filePath,'utf8'); const data = JSON.parse(jsonString);
+            // Path to the downloaded artifact
+            const artifactPath = 'lighthouse-results';
+            const regex = /lhr-.*\.json/;
+            const files = fs.readdirSync(artifactPath);
+            const matchingFiles = files.filter((file) => regex.test(file));
 
-            const fcp = data.audits['first-contentful-paint'].numericValue; const lcp = data.audits['largest-contentful-paint'].numericValue; const fmp = data.audits['first-meaningful-paint'].numericValue; const tbt = data.audits['total-blocking-time'].numericValue; const si = data.audits['speed-index'].numericValue; const cls = data.audits['cumulative-layout-shift'].displayValue;
-
-            const lightHouseLinks = JSON.parse('${{steps.lighthouse.outputs.links}}'); const lightHouseManifest = JSON.parse('${{steps.lighthouse.outputs.manifest}}'); const performance = lightHouseManifest[0].summary['performance']* 100; const accessibility = lightHouseManifest[0].summary['accessibility']* 100; const bestPractices = lightHouseManifest[0].summary['best-practices']* 100; const seo = lightHouseManifest[0].summary['seo']* 100; const pwa = lightHouseManifest[0].summary['pwa']* 100; const links = lightHouseLinks['https://www.tatacliq.com/'];
-            const currentDate = new Date();
-            console.log('resultsPath','${{steps.lighthouse.outputs.resultsPath}}'); console.log('links','${{steps.lighthouse.outputs.links}}'); console.log('assertionResults','${{steps.lighthouse.outputs.assertionResults}}'); console.log('manifest','${{steps.lighthouse.outputs.manifest}}'); 
-            const bodyData = {   "msite": {
-                "url": "www.tatacliq.com",
-                "currentDateTime":currentDate,
-                "pageName": "Pdp",
-                "webVitalData": {
-                    "Performance": `${performance}`,
-                    "Accessibility":`${accessibility}`,
-                    "bestPractices": `${bestPractices}`,
-                    "seo": `${seo}`,
-                    "pwa": `${pwa}`,
-                    "fcp": `${fcp}`,
-                    "lcp": `${lcp}`,
-                    "fmp": `${fmp}`,
-                    "tbt": `${tbt}`,
-                    "si": `${si}`,
-                    "cls": `${cls}`,    
-                }
-              }           
+            if (matchingFiles.length === 0) {
+              throw new Error('No Lighthouse JSON report found in the artifact.');
             }
 
-            # function sendRequest(data) {
-            #   fetch("http://3.109.48.133:8000/api/msite", {
-            #     method: "POST",
-            #     headers: {'Content-Type': 'application/json'}, 
-            #     body: JSON.stringify(data)
-            #   }).then(res => {
-            #     console.log("Request complete! response:", res);
-            #   });
-            # } sendRequest(bodyData);
+            // Read the Lighthouse JSON report
+            const filePath = path.join(artifactPath, matchingFiles[0]);
+            const jsonString = fs.readFileSync(filePath, 'utf8');
+            const data = JSON.parse(jsonString);
 
-             
-            
-            const htmlPath = JSON.stringify(JSON.parse('${{steps.LHCIAction.outputs.manifest}}')[0].htmlPath);
-            core.setOutput('htmlPath', htmlPath);
+            // Extract metrics from the Lighthouse report
+            const fcp = data.audits['first-contentful-paint'].numericValue;
+            const lcp = data.audits['largest-contentful-paint'].numericValue;
+            const fmp = data.audits['first-meaningful-paint'].numericValue;
+            const tbt = data.audits['total-blocking-time'].numericValue;
+            const si = data.audits['speed-index'].numericValue;
+            const cls = data.audits['cumulative-layout-shift'].displayValue;
+
+            // Extract summary scores
+            const lightHouseManifest = JSON.parse('${{steps.lighthouse.outputs.manifest}}');
+            const performance = lightHouseManifest[0].summary['performance'] * 100;
+            const accessibility = lightHouseManifest[0].summary['accessibility'] * 100;
+            const bestPractices = lightHouseManifest[0].summary['best-practices'] * 100;
+            const seo = lightHouseManifest[0].summary['seo'] * 100;
+            const pwa = lightHouseManifest[0].summary['pwa'] * 100;
+
+            // Prepare the data to send
+            const currentDate = new Date();
+            const bodyData = {
+              msite: {
+                url: "www.tatacliq.com",
+                currentDateTime: currentDate,
+                pageName: "Pdp",
+                webVitalData: {
+                  Performance: `${performance}`,
+                  Accessibility: `${accessibility}`,
+                  bestPractices: `${bestPractices}`,
+                  seo: `${seo}`,
+                  pwa: `${pwa}`,
+                  fcp: `${fcp}`,
+                  lcp: `${lcp}`,
+                  fmp: `${fmp}`,
+                  tbt: `${tbt}`,
+                  si: `${si}`,
+                  cls: `${cls}`,
+                }
+              }
+            };
+
+            // Log the data for debugging
+            console.log('Lighthouse Report Data:', JSON.stringify(bodyData, null, 2));
+
+            // Optionally, send the data to an external API
+            // fetch("http://3.109.48.133:8000/api/msite", {
+            //   method: "POST",
+            //   headers: { 'Content-Type': 'application/json' },
+            //   body: JSON.stringify(bodyData)
+            // }).then(res => {
+            //   console.log("Request complete! response:", res);
+            // });
+
+      # Step 8: Deploy Stage - Send report via HTTP request
       - name: Deploy Stage
         uses: fjogeleit/http-request-action@v1
         with:
@@ -82,23 +125,23 @@ jobs:
           method: POST
           customHeaders: '{"Content-Type": "application/json"}'
           data: |
-              {
-                "type":"message",
-                "attachments":[
-                    {
-                      "contentType":"application/vnd.microsoft.card.adaptive",
-                      "contentUrl":null,
-                      "content":{
-                          "$schema":"http://adaptivecards.io/schemas/adaptive-card.json",
-                          "type":"AdaptiveCard",
-                          "version":"1.2",
-                          "body":[
-                              {
-                              "type": "TextBlock",
-                              "text": 'Lighthouse Report ${{steps.htmlPath.outputs.htmlPath}}'
-                              }
-                          ]
+            {
+              "type": "message",
+              "attachments": [
+                {
+                  "contentType": "application/vnd.microsoft.card.adaptive",
+                  "contentUrl": null,
+                  "content": {
+                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                    "type": "AdaptiveCard",
+                    "version": "1.2",
+                    "body": [
+                      {
+                        "type": "TextBlock",
+                        "text": "Lighthouse Report ${{steps.lighthouse.outputs.resultsPath}}"
                       }
-                    }
-                ]
-              } 
+                    ]
+                  }
+                }
+              ]
+            }
