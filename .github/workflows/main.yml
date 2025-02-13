@@ -59,7 +59,7 @@ jobs:
             const path = require('path');
 
             // Path to the downloaded artifact
-            const artifactPath = 'lighthouse-results';
+            const artifactPath = '.lighthouseci';
             const regex = /lhr-.*\.json/;
             const files = fs.readdirSync(artifactPath);
             const matchingFiles = files.filter((file) => regex.test(file));
