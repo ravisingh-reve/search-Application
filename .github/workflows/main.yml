@@ -27,14 +27,14 @@ jobs:
       # Step 4: Debugging - List files after Lighthouse audit
       - name: List files after Lighthouse audit
         run: |
-          ls lighthouse-results
+          ls .lighthouseci
 
       # Step 5: Manually upload Lighthouse results
       - name: Upload Lighthouse Results
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-results
-          path: lighthouse-results  # Default path where Lighthouse CI stores results
+          path: .lighthouseci  # Default path where Lighthouse CI stores results
 
       # Step 6: Download the Lighthouse artifact
       # - name: Download artifacts
@@ -47,7 +47,7 @@ jobs:
       # Step 7: Debugging - List downloaded artifact files
       - name: List downloaded artifact files
         run: |
-          ls lighthouse-results
+          ls .lighthouseci
 
       # Step 8: Process Lighthouse results and send report
       - name: Send lighthouse report
@@ -59,7 +59,7 @@ jobs:
             const path = require('path');
 
             // Path to the downloaded artifact
-            const artifactPath = 'lighthouse-results';
+            const artifactPath = '.lighthouseci';
             const regex = /lhr-.*\.json/;
             const files = fs.readdirSync(artifactPath);
             const matchingFiles = files.filter((file) => regex.test(file));
