@@ -41,7 +41,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: lighthouse-results
-          path: .lighthouseci
+          path: lighthouse-results
           # Remove repository and run-id if downloading in the same workflow run
 
       # Step 7: Debugging - List downloaded artifact files
