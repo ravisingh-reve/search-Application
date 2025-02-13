@@ -145,7 +145,7 @@ jobs:
                     "body": [
                       {
                         "type": "TextBlock",
-                        "text": "Lighthouse Report ${{steps}}"
+                        "text": "Lighthouse Report ${{steps.lighthouse}}"
                       }
                     ]
                   }
