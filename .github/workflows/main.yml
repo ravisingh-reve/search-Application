@@ -37,11 +37,11 @@ jobs:
           path: .lighthouseci  # Default path where Lighthouse CI stores results
 
       # Step 6: Download the Lighthouse artifact
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: lighthouse-results
-          path: .lighthouseci
+      # - name: Download artifacts
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: lighthouse-results
+      #     path: .lighthouseci
           # Remove repository and run-id if downloading in the same workflow run
 
       # Step 7: Debugging - List downloaded artifact files
