@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-results
-          path: lighthouse-results  # Default path where Lighthouse CI stores results
+          path: .lighthouseci  # Default path where Lighthouse CI stores results
 
       # Step 6: Download the Lighthouse artifact
       - name: Download artifacts
