@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-results
-          path: .lighthouseci  # Default path where Lighthouse CI stores results
+          path: lighthouse-results  # Default path where Lighthouse CI stores results
 
       # Step 6: Download the Lighthouse artifact
       # - name: Download artifacts
@@ -47,7 +47,7 @@ jobs:
       # Step 7: Debugging - List downloaded artifact files
       - name: List downloaded artifact files
         run: |
-          ls .lighthouseci
+          ls lighthouse-results
 
       # Step 8: Process Lighthouse results and send report
       - name: Send lighthouse report
@@ -59,7 +59,7 @@ jobs:
             const path = require('path');
 
             // Path to the downloaded artifact
-            const artifactPath = '.lighthouseci';
+            const artifactPath = 'lighthouse-results';
             const regex = /lhr-.*\.json/;
             const files = fs.readdirSync(artifactPath);
             const matchingFiles = files.filter((file) => regex.test(file));
