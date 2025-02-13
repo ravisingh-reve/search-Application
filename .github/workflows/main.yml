@@ -128,7 +128,7 @@ jobs:
       - name: Deploy Stage
         uses: fjogeleit/http-request-action@v1
         with:
-          url: '${{secrets.WEB_VITALS_HOOK}}'
+          url: '${{secrets.NEW_WEB_VITALS}}'
           method: POST
           customHeaders: '{"Content-Type": "application/json"}'
           data: |
