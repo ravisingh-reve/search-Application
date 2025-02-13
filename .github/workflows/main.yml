@@ -25,9 +25,9 @@ jobs:
           uploadArtifacts: false  # Disable artifact upload in lighthouse-ci-action
 
       # Step 4: Debugging - List files after Lighthouse audit
-      # - name: List files after Lighthouse audit
-      #   run: |
-      #     ls lighthouse-results
+      - name: List files after Lighthouse audit
+        run: |
+          ls .lighthouseci
 
       # Step 5: Manually upload Lighthouse results
       - name: Upload Lighthouse Results
@@ -41,7 +41,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: lighthouse-results
-          path: /.lighthouseci
+          path: .lighthouseci
           # Remove repository and run-id if downloading in the same workflow run
 
       # Step 7: Debugging - List downloaded artifact files
