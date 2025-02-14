@@ -23,6 +23,17 @@ jobs:
             'https://www.tatacliq.com'
           temporaryPublicStorage: true
           uploadArtifacts: false  # Disable artifact upload in lighthouse-ci-action
+          config: |
+            {
+              "settings": {
+                "emulatedFormFactor": "desktop",
+                "throttling": {
+                  "rttMs": 40,
+                  "throughputKbps": 10240,
+                  "cpuSlowdownMultiplier": 1
+                }
+              }
+            }
 
       # Step 4: Debugging - List files after Lighthouse audit
       - name: List files after Lighthouse audit
@@ -145,7 +156,7 @@ jobs:
                     "body": [
                       {
                         "type": "TextBlock",
-                        "text": "Lighthouse Report ${{JSON.stringify(steps.lighthouse)}}"
+                        "text": "Lighthouse Report ${{steps.lighthouse}}"
                       }
                     ]
                   }
