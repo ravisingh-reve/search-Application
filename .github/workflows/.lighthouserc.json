@@ -9,6 +9,11 @@
           "cpuSlowdownMultiplier": 1
         }
       }
+    },
+    "assert": {
+      "assertions": {
+        "bf-cache": "off"
+      }
     }
   }
 }
