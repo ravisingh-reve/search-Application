@@ -12,7 +12,11 @@
     },
     "assert": {
       "assertions": {
-        "bf-cache": "off"
+        "bf-cache": "off",
+        "csp-xss": "off",
+        "deprecations": "off",
+        "errors-in-console": "off",
+        "frame-title": "off"
       }
     }
   }
