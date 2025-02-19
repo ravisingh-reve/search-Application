@@ -15,32 +15,6 @@ jobs:
           node-version: 16.x
       
       # Step 3: Run Lighthouse audit
-      - name: Create Lighthouse Config File (Desktop)
-        run: |
-          cat <<EOF > lighthouserc-desktop.json
-          {
-            "ci": {
-              "collect": {
-                "url": ["https://www.tatacliq.com"],
-                "settings": {
-                  "emulatedUserAgent": "desktop",
-                  "formFactor": "desktop",
-                  "throttling": {
-                    "rttMs": 40,
-                    "throughputKbps": 10240,
-                    "cpuSlowdownMultiplier": 1
-                  }
-                }
-              },
-              "assert": {
-                "assertions": {
-                  "seo": "off"
-                }
-              }
-            }
-          }
-          EOF
-
       - name: Debug Lighthouse Configuration
         run: cat lighthouserc.json
 
@@ -48,16 +22,9 @@ jobs:
         id: lighthouse
         uses: treosh/lighthouse-ci-action@v10
         with:
-          configPath: "./lighthouserc-desktop.json"
+          configPath: "./lighthouserc.json"
           temporaryPublicStorage: true
           uploadArtifacts: false
-        env:
-          LHCI_COLLECT_SETTINGS_EMULATEDFORMFACTOR: "desktop"
-          LHCI_COLLECT_SETTINGS_FORMFACTOR: "desktop"
-          LHCI_COLLECT_SETTINGS_THROTTLING_RTTMS: "40"
-          LHCI_COLLECT_SETTINGS_THROTTLING_THROUGHPUTKBPS: "10240"
-          LHCI_COLLECT_SETTINGS_THROTTLING_CPUSLOWDOWNMULTIPLIER: "1"
-          LHCI_COLLECT_SETTINGS_CHROMEFLAGS: "--no-mobile-emulation"
 
       - name: List files after Lighthouse audit
         run: ls .lighthouseci
