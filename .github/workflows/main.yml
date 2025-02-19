@@ -23,7 +23,12 @@ jobs:
             'https://www.tatacliq.com'
           temporaryPublicStorage: true
           uploadArtifacts: false  # Disable artifact upload in lighthouse-ci-action
-          configPath: lighthouserc.json
+        env:
+          LHCI_COLLECT_SETTINGS_EMULATEDFORMFACTOR: "desktop"
+          LHCI_COLLECT_SETTINGS_THROTTLING_RTTMS: 40
+          LHCI_COLLECT_SETTINGS_THROTTLING_THROUGHPUTKBPS: 10240
+          LHCI_COLLECT_SETTINGS_THROTTLING_CPUSLOWDOWNMULTIPLIER: 1
+          LHCI_ASSERT_SEO: "off"
       # Step 4: Debugging - List files after Lighthouse audit
       - name: List files after Lighthouse audit
         run: |
