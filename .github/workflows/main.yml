@@ -13,7 +13,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
-
+      
       # Step 3: Run Lighthouse audit
       - name: Audit URLs using Lighthouse
         id: lighthouse
@@ -23,21 +23,7 @@ jobs:
             'https://www.tatacliq.com'
           temporaryPublicStorage: true
           uploadArtifacts: false  # Disable artifact upload in lighthouse-ci-action
-          configPath: |
-            {
-              "settings": {
-                "emulatedFormFactor": "desktop",
-                "formFactor": "desktop",
-                "throttling": {
-                  "rttMs": 40,
-                  "throughputKbps": 10240,
-                  "cpuSlowdownMultiplier": 1
-                }
-              },
-              "assertions": {
-                "seo": "off"
-              }
-            }
+          configPath: lighthouserc.json
           
       - name: Debug Lighthouse Configuration
         run: |
