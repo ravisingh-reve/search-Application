@@ -20,7 +20,7 @@ jobs:
         
       - name: Debug Lighthouse Run
         run: |
-          npx lhci collect --config=lighthouserc.json --verbose   
+          npx lhci collect --config=.lighthouserc.json --verbose   
 
       - name: Audit URLs using Lighthouse (Desktop)
         id: lighthouse
