@@ -30,6 +30,13 @@ jobs:
           LHCI_COLLECT_SETTINGS_THROTTLING_THROUGHPUTKBPS: 10240
           LHCI_COLLECT_SETTINGS_THROTTLING_CPUSLOWDOWNMULTIPLIER: 1
           LHCI_ASSERT_SEO: "off"
+          LHCI_COLLECT_SETTINGS_CHROMEFLAGS: "--no-mobile-emulation"
+          
+      - name: Debug Lighthouse Configuration
+        run: |
+          echo "Emulated Form Factor: $LHCI_COLLECT_SETTINGS_EMULATEDFORMFACTOR"
+          echo "Form Factor: $LHCI_COLLECT_SETTINGS_FORMFACTOR"
+    
       # Step 4: Debugging - List files after Lighthouse audit
       - name: List files after Lighthouse audit
         run: |
