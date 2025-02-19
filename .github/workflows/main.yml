@@ -17,7 +17,7 @@ jobs:
       # Step 3: Run Lighthouse audit
       - name: Create Lighthouse Config File (Desktop)
         run: |
-          cat <<EOF > lighthouserc.json
+          cat <<EOF > lighthouserc-desktop.json
           {
             "ci": {
               "collect": {
@@ -48,7 +48,7 @@ jobs:
         id: lighthouse
         uses: treosh/lighthouse-ci-action@v10
         with:
-          configPath: "./lighthouserc.json"
+          configPath: "./lighthouserc-desktop.json"
           temporaryPublicStorage: true
           uploadArtifacts: false
         env:
