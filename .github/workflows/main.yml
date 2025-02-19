@@ -26,6 +26,18 @@ jobs:
           configPath: "./lighthouserc.json"
           temporaryPublicStorage: true
           uploadArtifacts: false
+          
+      - name: Force Desktop Mode
+        run: |
+          export LHCI_COLLECT_SETTINGS_FORMFACTOR=desktop
+          export LHCI_COLLECT_SETTINGS_EMULATEDFORMFACTOR=desktop
+          echo "LHCI_COLLECT_SETTINGS_FORMFACTOR=$LHCI_COLLECT_SETTINGS_FORMFACTOR"
+          echo "LHCI_COLLECT_SETTINGS_EMULATEDFORMFACTOR=$LHCI_COLLECT_SETTINGS_EMULATEDFORMFACTOR"
+
+      - name: Debug Lighthouse Run
+        run: |
+          npx lhci collect --config=./lighthouserc.json --verbose
+            
 
       - name: List files after Lighthouse audit
         run: ls .lighthouseci
