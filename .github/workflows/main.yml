@@ -23,7 +23,7 @@ jobs:
             'https://www.tatacliq.com'
           temporaryPublicStorage: true
           uploadArtifacts: false  # Disable artifact upload in lighthouse-ci-action
-          configPath: lighthouserc.json
+          configPath: "./lighthouserc.json" 
           
       - name: Debug Lighthouse Configuration
         run: |
