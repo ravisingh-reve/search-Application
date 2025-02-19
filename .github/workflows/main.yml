@@ -15,15 +15,58 @@ jobs:
           node-version: 16.x
       
       # Step 3: Run Lighthouse audit
-      - name: Audit URLs using Lighthouse
+      - name: Create Lighthouse Config File (Desktop)
+        run: |
+          cat <<EOF > lighthouserc.json
+          {
+            "ci": {
+              "collect": {
+                "url": ["https://www.tatacliq.com"],
+                "settings": {
+                  "emulatedFormFactor": "desktop",
+                  "formFactor": "desktop",
+                  "throttling": {
+                    "rttMs": 40,
+                    "throughputKbps": 10240,
+                    "cpuSlowdownMultiplier": 1
+                  }
+                }
+              },
+              "assert": {
+                "assertions": {
+                  "seo": "off"
+                }
+              }
+            }
+          }
+          EOF
+
+      - name: Debug Lighthouse Configuration
+        run: cat lighthouserc.json
+
+      - name: Audit URLs using Lighthouse (Desktop)
         id: lighthouse
         uses: treosh/lighthouse-ci-action@v10
         with:
-          urls: |
-            'https://www.tatacliq.com'
+          configPath: "./lighthouserc.json"
           temporaryPublicStorage: true
-          uploadArtifacts: false  # Disable artifact upload in lighthouse-ci-action
-          configPath: "lighthouserc.json" 
+          uploadArtifacts: false
+        env:
+          LHCI_COLLECT_SETTINGS_EMULATEDFORMFACTOR: "desktop"
+          LHCI_COLLECT_SETTINGS_FORMFACTOR: "desktop"
+          LHCI_COLLECT_SETTINGS_THROTTLING_RTTMS: "40"
+          LHCI_COLLECT_SETTINGS_THROTTLING_THROUGHPUTKBPS: "10240"
+          LHCI_COLLECT_SETTINGS_THROTTLING_CPUSLOWDOWNMULTIPLIER: "1"
+          LHCI_COLLECT_SETTINGS_CHROMEFLAGS: "--no-mobile-emulation"
+
+      - name: List files after Lighthouse audit
+        run: ls .lighthouseci
+
+      - name: Upload Lighthouse Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-results
+          path: .lighthouseci
           
       - name: Debug Lighthouse Configuration
         run: |
