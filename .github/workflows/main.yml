@@ -17,6 +17,10 @@ jobs:
       # Step 3: Run Lighthouse audit
       - name: Debug Lighthouse Configuration
         run: cat lighthouserc.json
+        
+      - name: Debug Lighthouse Run
+        run: |
+          npx lhci collect --config=./lighthouserc.json --verbose   
 
       - name: Audit URLs using Lighthouse (Desktop)
         id: lighthouse
@@ -33,11 +37,6 @@ jobs:
           export LHCI_COLLECT_SETTINGS_EMULATEDFORMFACTOR=desktop
           echo "LHCI_COLLECT_SETTINGS_FORMFACTOR=$LHCI_COLLECT_SETTINGS_FORMFACTOR"
           echo "LHCI_COLLECT_SETTINGS_EMULATEDFORMFACTOR=$LHCI_COLLECT_SETTINGS_EMULATEDFORMFACTOR"
-
-      - name: Debug Lighthouse Run
-        run: |
-          npx lhci collect --config=./lighthouserc.json --verbose
-            
 
       - name: List files after Lighthouse audit
         run: ls .lighthouseci
