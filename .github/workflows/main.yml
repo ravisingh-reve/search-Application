@@ -23,14 +23,21 @@ jobs:
             'https://www.tatacliq.com'
           temporaryPublicStorage: true
           uploadArtifacts: false  # Disable artifact upload in lighthouse-ci-action
-        env:
-          LHCI_COLLECT_SETTINGS_EMULATEDFORMFACTOR: "desktop"
-          LHCI_COLLECT_SETTINGS_FORMFACTOR: "desktop"
-          LHCI_COLLECT_SETTINGS_THROTTLING_RTTMS: 40
-          LHCI_COLLECT_SETTINGS_THROTTLING_THROUGHPUTKBPS: 10240
-          LHCI_COLLECT_SETTINGS_THROTTLING_CPUSLOWDOWNMULTIPLIER: 1
-          LHCI_ASSERT_SEO: "off"
-          LHCI_COLLECT_SETTINGS_CHROMEFLAGS: "--no-mobile-emulation"
+          config: |
+            {
+              "settings": {
+                "emulatedFormFactor": "desktop",
+                "formFactor": "desktop",
+                "throttling": {
+                  "rttMs": 40,
+                  "throughputKbps": 10240,
+                  "cpuSlowdownMultiplier": 1
+                }
+              },
+              "assertions": {
+                "seo": "off"
+              }
+            }
           
       - name: Debug Lighthouse Configuration
         run: |
