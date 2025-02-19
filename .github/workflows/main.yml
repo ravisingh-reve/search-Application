@@ -23,7 +23,7 @@ jobs:
               "collect": {
                 "url": ["https://www.tatacliq.com"],
                 "settings": {
-                  "emulatedFormFactor": "desktop",
+                  "emulatedUserAgent": "desktop",
                   "formFactor": "desktop",
                   "throttling": {
                     "rttMs": 40,
