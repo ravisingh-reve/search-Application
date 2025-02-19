@@ -1,23 +1,20 @@
 {
   "ci": {
-    "collect": {
-      "settings": {
-        "emulatedFormFactor": "desktop",
-        "throttling": {
-          "rttMs": 40,
-          "throughputKbps": 10240,
-          "cpuSlowdownMultiplier": 1
-        }
-      }
-    },
-    "assert": {
-      "assertions": {
-        "bf-cache": "off",
-        "csp-xss": "off",
-        "deprecations": "off",
-        "errors-in-console": "off",
-        "frame-title": "off"
-      }
+              "collect": {
+                "settings": {
+                  "emulatedFormFactor": "desktop",
+                  "formFactor": "desktop",
+                  "throttling": {
+                    "rttMs": 40,
+                    "throughputKbps": 10240,
+                    "cpuSlowdownMultiplier": 1
+                  }
+                }
+              },
+              "assert": {
+                "assertions": {
+                  "seo": "off"
+                }
+              }
     }
-  }
 }
