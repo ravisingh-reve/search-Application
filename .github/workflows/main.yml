@@ -23,7 +23,7 @@ jobs:
             'https://www.tatacliq.com'
           temporaryPublicStorage: true
           uploadArtifacts: false  # Disable artifact upload in lighthouse-ci-action
-          config: |
+          configPath: |
             {
               "settings": {
                 "emulatedFormFactor": "desktop",
