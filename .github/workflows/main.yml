@@ -22,6 +22,8 @@ jobs:
         id: lighthouse
         uses: treosh/lighthouse-ci-action@v10
         with:
+          urls: |
+           https://www.tatacliq.com
           configPath: "./lighthouserc.json"
           temporaryPublicStorage: true
           uploadArtifacts: false
