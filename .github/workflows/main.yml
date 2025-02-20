@@ -15,8 +15,8 @@ jobs:
           node-version: 16.x
       
       # Step 3: Run Lighthouse audit
-      - name: Debug Lighthouse Configuration
-        run: cat ./lighthouserc.json
+      # - name: Debug Lighthouse Configuration
+      #   run: cat lighthouserc.json
         
       - name: Debug Lighthouse Run
         run: |
