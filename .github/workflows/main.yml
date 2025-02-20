@@ -16,7 +16,7 @@ jobs:
       
       # Step 3: Run Lighthouse audit
       - name: Debug Lighthouse Configuration
-        run: cat lighthouserc.json
+        run: cat ./lighthouserc.json
         
       - name: Debug Lighthouse Run
         run: |
