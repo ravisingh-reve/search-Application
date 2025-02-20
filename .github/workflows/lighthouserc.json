@@ -1,0 +1,22 @@
+{
+  "ci": {
+    "collect": {
+      "url": ["https://www.tatacliq.com"],
+      "settings": {
+        "formFactor": "desktop",
+        "screenEmulation": { "disabled": true },
+        "emulatedFormFactor": "desktop",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "cpuSlowdownMultiplier": 1
+        }
+      }
+    },
+    "assert": {
+      "assertions": {
+        "seo": "off"
+      }
+    }
+  }
+}
